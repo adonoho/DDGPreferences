@@ -20,6 +20,7 @@
 		CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */; };
 		CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */; };
 		CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEA28E1F13FFF572005EB7CD /* Settings.bundle */; };
+		CED4991C14030C0500466BE3 /* DDG Square.png in Resources */ = {isa = PBXBuildFile; fileRef = CED4991B14030C0500466BE3 /* DDG Square.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +36,7 @@
 		CE01A7A213FFF08D00880130 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DDGPreferencesViewController.xib; sourceTree = "<group>"; };
 		CE1D1EE613FFFD8D00EE44A0 /* DDGPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferences.h; sourceTree = "<group>"; };
 		CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferences.m; sourceTree = "<group>"; };
-		CE1D1EEB13FFFE9600EE44A0 /* DDGMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DDGMacros.h; sourceTree = "<group>"; };
+		CE1D1EEB13FFFE9600EE44A0 /* DDGMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGMacros.h; sourceTree = "<group>"; };
 		CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGMacros.m; sourceTree = "<group>"; };
 		CE1D1EF61400038700EE44A0 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = Preferences/Preferences.h; sourceTree = "<group>"; };
 		CE1D1EF71400038700EE44A0 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Preferences.m; path = Preferences/Preferences.m; sourceTree = "<group>"; };
@@ -44,6 +45,7 @@
 		CEA28E1C13FFF538005EB7CD /* DDGPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferencesViewController.h; sourceTree = "<group>"; };
 		CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferencesViewController.m; sourceTree = "<group>"; };
 		CEA28E1F13FFF572005EB7CD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CED4991B14030C0500466BE3 /* DDG Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		CE01A79013FFF08D00880130 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CED4991B14030C0500466BE3 /* DDG Square.png */,
 				CE01A79113FFF08D00880130 /* DDGPreferences-Info.plist */,
 				CE01A79213FFF08D00880130 /* InfoPlist.strings */,
 				CE01A79513FFF08D00880130 /* DDGPreferences-Prefix.pch */,
@@ -215,6 +218,7 @@
 				CE01A79D13FFF08D00880130 /* MainWindow.xib in Resources */,
 				CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */,
 				CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */,
+				CED4991C14030C0500466BE3 /* DDG Square.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
