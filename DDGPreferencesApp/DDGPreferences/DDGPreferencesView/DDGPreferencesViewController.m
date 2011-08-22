@@ -78,19 +78,6 @@
 } // -didReceiveMemoryWarning
 
 
-//- (DDGPreferencesViewController *) init {
-//    
-//    self = [super init];
-//    
-//    if (self) {
-//        
-//        self.prefs = [[Preferences new] autorelease];
-//    }
-//    return self;
-//    
-//} // -init
-
-
 #pragma mark - UIViewController view lifecycle methods
 
 
