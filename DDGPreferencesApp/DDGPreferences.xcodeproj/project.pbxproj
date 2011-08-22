@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE01A78A13FFF08D00880130 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78913FFF08D00880130 /* UIKit.framework */; };
+		CE01A78C13FFF08D00880130 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78B13FFF08D00880130 /* Foundation.framework */; };
+		CE01A78E13FFF08D00880130 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78D13FFF08D00880130 /* CoreGraphics.framework */; };
+		CE01A79413FFF08D00880130 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE01A79213FFF08D00880130 /* InfoPlist.strings */; };
+		CE01A79713FFF08D00880130 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01A79613FFF08D00880130 /* main.m */; };
+		CE01A79D13FFF08D00880130 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01A79B13FFF08D00880130 /* MainWindow.xib */; };
+		CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01A7A113FFF08D00880130 /* DDGPreferencesViewController.xib */; };
+		CE1D1EE813FFFD8D00EE44A0 /* DDGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */; };
+		CE1D1EED13FFFE9600EE44A0 /* DDGMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */; };
+		CE1D1EF81400038700EE44A0 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF71400038700EE44A0 /* Preferences.m */; };
+		CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */; };
+		CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */; };
+		CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEA28E1F13FFF572005EB7CD /* Settings.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CE01A78513FFF08D00880130 /* DDGPreferences.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDGPreferences.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE01A78913FFF08D00880130 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CE01A78B13FFF08D00880130 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CE01A78D13FFF08D00880130 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CE01A79113FFF08D00880130 /* DDGPreferences-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DDGPreferences-Info.plist"; sourceTree = "<group>"; };
+		CE01A79313FFF08D00880130 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE01A79513FFF08D00880130 /* DDGPreferences-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DDGPreferences-Prefix.pch"; sourceTree = "<group>"; };
+		CE01A79613FFF08D00880130 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE01A79C13FFF08D00880130 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		CE01A7A213FFF08D00880130 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DDGPreferencesViewController.xib; sourceTree = "<group>"; };
+		CE1D1EE613FFFD8D00EE44A0 /* DDGPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferences.h; sourceTree = "<group>"; };
+		CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferences.m; sourceTree = "<group>"; };
+		CE1D1EEB13FFFE9600EE44A0 /* DDGMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DDGMacros.h; sourceTree = "<group>"; };
+		CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGMacros.m; sourceTree = "<group>"; };
+		CE1D1EF61400038700EE44A0 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = Preferences/Preferences.h; sourceTree = "<group>"; };
+		CE1D1EF71400038700EE44A0 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Preferences.m; path = Preferences/Preferences.m; sourceTree = "<group>"; };
+		CEA28E1813FFF526005EB7CD /* DDGPreferencesAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferencesAppDelegate.h; sourceTree = "<group>"; };
+		CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferencesAppDelegate.m; sourceTree = "<group>"; };
+		CEA28E1C13FFF538005EB7CD /* DDGPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferencesViewController.h; sourceTree = "<group>"; };
+		CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferencesViewController.m; sourceTree = "<group>"; };
+		CEA28E1F13FFF572005EB7CD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE01A78213FFF08D00880130 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE01A78A13FFF08D00880130 /* UIKit.framework in Frameworks */,
+				CE01A78C13FFF08D00880130 /* Foundation.framework in Frameworks */,
+				CE01A78E13FFF08D00880130 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE01A77A13FFF08D00880130 = {
+			isa = PBXGroup;
+			children = (
+				CE01A78F13FFF08D00880130 /* DDGPreferences */,
+				CE01A78813FFF08D00880130 /* Frameworks */,
+				CE01A78613FFF08D00880130 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE01A78613FFF08D00880130 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE01A78513FFF08D00880130 /* DDGPreferences.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE01A78813FFF08D00880130 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE01A78913FFF08D00880130 /* UIKit.framework */,
+				CE01A78B13FFF08D00880130 /* Foundation.framework */,
+				CE01A78D13FFF08D00880130 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE01A78F13FFF08D00880130 /* DDGPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D1EFA1400039700EE44A0 /* Preferences */,
+				CE1D1EEA13FFFE9600EE44A0 /* DDGMacros */,
+				CE1D1EE513FFFD8D00EE44A0 /* DDGPreferences */,
+				CEA28E1B13FFF538005EB7CD /* DDGPreferencesView */,
+				CEA28E1713FFF526005EB7CD /* DDGPreferencesAppDelegate */,
+				CE01A79013FFF08D00880130 /* Supporting Files */,
+			);
+			path = DDGPreferences;
+			sourceTree = "<group>";
+		};
+		CE01A79013FFF08D00880130 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE01A79113FFF08D00880130 /* DDGPreferences-Info.plist */,
+				CE01A79213FFF08D00880130 /* InfoPlist.strings */,
+				CE01A79513FFF08D00880130 /* DDGPreferences-Prefix.pch */,
+				CE01A79613FFF08D00880130 /* main.m */,
+				CEA28E1F13FFF572005EB7CD /* Settings.bundle */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CE1D1EE513FFFD8D00EE44A0 /* DDGPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D1EE613FFFD8D00EE44A0 /* DDGPreferences.h */,
+				CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */,
+			);
+			name = DDGPreferences;
+			path = ../../DDGPreferences;
+			sourceTree = "<group>";
+		};
+		CE1D1EEA13FFFE9600EE44A0 /* DDGMacros */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D1EEB13FFFE9600EE44A0 /* DDGMacros.h */,
+				CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */,
+			);
+			name = DDGMacros;
+			path = ../../DDGMacros;
+			sourceTree = "<group>";
+		};
+		CE1D1EFA1400039700EE44A0 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				CE1D1EF61400038700EE44A0 /* Preferences.h */,
+				CE1D1EF71400038700EE44A0 /* Preferences.m */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		CEA28E1713FFF526005EB7CD /* DDGPreferencesAppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				CE01A79B13FFF08D00880130 /* MainWindow.xib */,
+				CEA28E1813FFF526005EB7CD /* DDGPreferencesAppDelegate.h */,
+				CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */,
+			);
+			path = DDGPreferencesAppDelegate;
+			sourceTree = "<group>";
+		};
+		CEA28E1B13FFF538005EB7CD /* DDGPreferencesView */ = {
+			isa = PBXGroup;
+			children = (
+				CE01A7A113FFF08D00880130 /* DDGPreferencesViewController.xib */,
+				CEA28E1C13FFF538005EB7CD /* DDGPreferencesViewController.h */,
+				CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */,
+			);
+			path = DDGPreferencesView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE01A78413FFF08D00880130 /* DDGPreferences */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE01A7A613FFF08D00880130 /* Build configuration list for PBXNativeTarget "DDGPreferences" */;
+			buildPhases = (
+				CE01A78113FFF08D00880130 /* Sources */,
+				CE01A78213FFF08D00880130 /* Frameworks */,
+				CE01A78313FFF08D00880130 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DDGPreferences;
+			productName = DDGPreferences;
+			productReference = CE01A78513FFF08D00880130 /* DDGPreferences.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE01A77C13FFF08D00880130 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Donoho Design Group, L.L.C.";
+			};
+			buildConfigurationList = CE01A77F13FFF08D00880130 /* Build configuration list for PBXProject "DDGPreferences" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CE01A77A13FFF08D00880130;
+			productRefGroup = CE01A78613FFF08D00880130 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE01A78413FFF08D00880130 /* DDGPreferences */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE01A78313FFF08D00880130 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE01A79413FFF08D00880130 /* InfoPlist.strings in Resources */,
+				CE01A79D13FFF08D00880130 /* MainWindow.xib in Resources */,
+				CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */,
+				CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE01A78113FFF08D00880130 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE01A79713FFF08D00880130 /* main.m in Sources */,
+				CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */,
+				CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */,
+				CE1D1EE813FFFD8D00EE44A0 /* DDGPreferences.m in Sources */,
+				CE1D1EED13FFFE9600EE44A0 /* DDGMacros.m in Sources */,
+				CE1D1EF81400038700EE44A0 /* Preferences.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CE01A79213FFF08D00880130 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE01A79313FFF08D00880130 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CE01A79B13FFF08D00880130 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE01A79C13FFF08D00880130 /* en */,
+			);
+			name = MainWindow.xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		CE01A7A113FFF08D00880130 /* DDGPreferencesViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE01A7A213FFF08D00880130 /* en */,
+			);
+			name = DDGPreferencesViewController.xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE01A7A413FFF08D00880130 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CE01A7A513FFF08D00880130 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		CE01A7A713FFF08D00880130 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DDGPreferences/DDGPreferences-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "DDGPreferences/DDGPreferences-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CE01A7A813FFF08D00880130 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DDGPreferences/DDGPreferences-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "DDGPreferences/DDGPreferences-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE01A77F13FFF08D00880130 /* Build configuration list for PBXProject "DDGPreferences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE01A7A413FFF08D00880130 /* Debug */,
+				CE01A7A513FFF08D00880130 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE01A7A613FFF08D00880130 /* Build configuration list for PBXNativeTarget "DDGPreferences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE01A7A713FFF08D00880130 /* Debug */,
+				CE01A7A813FFF08D00880130 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE01A77C13FFF08D00880130 /* Project object */;
+}
