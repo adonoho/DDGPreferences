@@ -20,7 +20,6 @@
 		CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */; };
 		CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */; };
 		CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEA28E1F13FFF572005EB7CD /* Settings.bundle */; };
-		CEC241B9140404A700CED701 /* DDG Square 57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC241B8140404A700CED701 /* DDG Square 57x57.png */; };
 		CED4991C14030C0500466BE3 /* DDG Square.png in Resources */ = {isa = PBXBuildFile; fileRef = CED4991B14030C0500466BE3 /* DDG Square.png */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +45,6 @@
 		CEA28E1C13FFF538005EB7CD /* DDGPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferencesViewController.h; sourceTree = "<group>"; };
 		CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferencesViewController.m; sourceTree = "<group>"; };
 		CEA28E1F13FFF572005EB7CD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		CEC241B8140404A700CED701 /* DDG Square 57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square 57x57.png"; sourceTree = "<group>"; };
 		CED4991B14030C0500466BE3 /* DDG Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +105,6 @@
 		CE01A79013FFF08D00880130 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CEC241B8140404A700CED701 /* DDG Square 57x57.png */,
 				CED4991B14030C0500466BE3 /* DDG Square.png */,
 				CE01A79113FFF08D00880130 /* DDGPreferences-Info.plist */,
 				CE01A79213FFF08D00880130 /* InfoPlist.strings */,
@@ -222,7 +219,6 @@
 				CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */,
 				CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */,
 				CED4991C14030C0500466BE3 /* DDG Square.png in Resources */,
-				CEC241B9140404A700CED701 /* DDG Square 57x57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
