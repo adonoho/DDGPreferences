@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //	Created by Andrew Donoho on 2009/05/20.
-//	Copyright 2009-2011 Donoho Design Group, L.L.C.. All rights reserved.
+//	Copyright 2009-2011 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
