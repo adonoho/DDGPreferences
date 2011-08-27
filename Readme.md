@@ -139,3 +139,9 @@ I hope you find `DDGPreferences` useful.
 In a future post for advanced programmers, I will describe how `DDGPreferences`
 functions.
 
+### Acknowledgements:
+
+I would like to thank Scott Gustafson and Mason Weems for their suggestions and 
+support. Also, Austin's local Mac OS X/iOS developer group, Cocoa Coders, organized 
+by Jim Hillhouse and Rajat Datta, has been extremely helpful in my return
+to software engineering.
