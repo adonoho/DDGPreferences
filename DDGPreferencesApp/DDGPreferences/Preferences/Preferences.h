@@ -46,7 +46,7 @@
 #import <Foundation/Foundation.h>
 #import "DDGPreferences.h"
 
-@interface Preferences : DDGPreferences 
+@interface Preferences : DDGPreferences <DDGPreferences> 
 
 @property (nonatomic, copy)   NSString *nameSetting;
 @property (nonatomic, assign, getter=isEnabledSetting) BOOL enabledSetting;

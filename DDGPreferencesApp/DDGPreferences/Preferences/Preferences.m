@@ -81,22 +81,6 @@
 } // -dealloc
 
 
-- (Preferences *) init {
-    
-    self = [super init];
-    
-    if (self) {
-        
-        if (!self.doPreferencesExist) {
-            
-            self.rectPref = CGRectMake(10.0f, 20.0f, 40.0f, 80.0f);
-        }
-    }
-    return self;
-    
-} // -init
-
-
 - (NSString *) description {
     
     return [NSString stringWithFormat:
@@ -120,5 +104,18 @@
                          [NSValue valueWithCGRect: rect]];
 
 } // -setRectPref:
+
+
+#pragma mark - DDGPreferences protocol methods.
+
+
+- (void) setDefaultPreferences {
+    
+    self.namePref = @"";
+    self.enabledPref = NO;
+    self.sliderPref  = 100.0f;
+    self.rectPref = CGRectMake(10.0f, 20.0f, 40.0f, 80.0f);
+    
+} // -setDefaultPreferences
 
 @end
