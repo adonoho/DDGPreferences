@@ -4,7 +4,7 @@ applications, as I do in my development consulting practice, it is tedious to
 code up a custom preferences class for each app. My class, `DDGPreferences`, is
 an attempt to minimize the tedium by providing a very simple API to the
 NSUserDefaults class for both settings and custom preferences. In addition to
-`DDGPreferences`, I have included a set of standard logging macros, DDGMacros,
+`DDGPreferences`, I have included a set of standard logging macros, `DDGMacros`,
 and an example single view iOS app tying all of the pieces together.
 
 ## The API
@@ -29,7 +29,7 @@ to be no more than a list of properties. As in:
 
 Furthermore, the only difference between whether a property was visible in
 Apple's settings app should be if a key matching its exact name was present in
-the "Root.plist" in the "Settings.bundle". In other words, each setting has an
+the `Root.plist` in the `Settings.bundle`. In other words, each setting has an
 identifier/key which is identical to a property name. This post is not a
 tutorial on how to build an app that uses Apple's Settings application. That
 said the example app has only made minor changes to the fields created when
@@ -48,14 +48,14 @@ arbitrary NSCoding compliant class to a preference.
 
 If you have default preference values which are different from the state of a
 freshly initialized object, then you must implement the `DDGPreferences`
-protocol's single method, -setDefaultPreferences. The example application has
+protocol's single method, `-setDefaultPreferences`. The example application has
 this method.
 
 What about synchronizing changes between Apple's Settings app and yours while
 the app is in the background? When your app returns to the foreground, I
 recommend you read/write the Settings managed values in response to
-the UIApplicationDidBecomeActiveNotification,
-UIApplicationWillResignActiveNotification notification pair. The example app
+the `UIApplicationDidBecomeActiveNotification`,
+`UIApplicationWillResignActiveNotification` notification pair. The example app
 shows one way to do this. All other coordination with the Settings app is
 handled by `DDGPreferences`.
 
@@ -64,23 +64,23 @@ handled by `DDGPreferences`.
 I've included an app showing how to use `DDGPreferences`. It is a single view
 iPhone app with an array of identical controls for both Apple's Settings app
 and the `DDGPreferences` app. You can change the preferences for the settings in
-both apps and they transfer bi-directionally. A simple CGRect is also
+both apps and they transfer bi-directionally. A simple `CGRect` is also
 initialized and stored. It is then displayed in a UILabel. How to store a
-complex structure, such as a CGRect, is described below. Traditionally, your
+complex structure, such as a `CGRect`, is described below. Traditionally, your
 preferences are stored with your application singleton. In this example, for
 pedagogical simplicity, I store them in the root view controller.
 
 ### Saving complex classes:
 
 This is an advanced technique and, if you can, I recommend that you avoid
-using it. Any NSCoding compliant class can be stored, with care, in
+using it. Any `NSCoding` compliant class can be stored, with care, in
 `DDGPreferences`. As `DDGPreferences` uses the properties to determine what needs
-to be persisted, you cannot just define a @property for your class that is not
-one of those supported by Apple's .plist format; you need to define an NSData
+to be persisted, you cannot just define a `@property` for your class that is not
+one of those supported by Apple's .plist format; you need to define an `NSData`
 typed instance variable to hold an archived instance of your class/structure.
-In the example, rectPrefData is that field. To access this data as your
-preferred class, you need to define "old school" Objective-C v1 style
-accessors. In the example, these are -rectPref/-setRectPref:. Somewhat
+In the example, `rectPrefData` is that property. To access this data as your
+preferred type, you need to define "old school" Objective-C v1 style
+accessors. In the example, these are `-rectPref`/`-setRectPref:`. Somewhat
 obviously, these accessors will use rectPrefData to store the value. A example
 implementation of these methods is:
 
@@ -99,8 +99,8 @@ implementation of these methods is:
     } // -setRectPref:
     
 
-They work by taking your NSCoding compliant class and archiving it using the
-NSKeyedArchiver/NSKeyedUnarchiver classes. The above methods, for pedagogical
+They work by taking your `NSCoding` compliant class and archiving it using the
+`NSKeyedArchiver`/`NSKeyedUnarchiver` classes. The above methods, for pedagogical
 purposes, are not key-value coding compliant.
 
 ### Licensing:
