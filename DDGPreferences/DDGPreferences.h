@@ -13,7 +13,7 @@
 // CGFloat [these scalar types are limited by the .plist spec.]).
 //
 // There is no support for automatically converting structures to NSValues.
-// You must manually convert them to NSData items. This can be done by 
+// You must manually convert them to NSData items. This can be done by using
 // non-property based accessors. An example is implemented in the sample app.
 //
 
