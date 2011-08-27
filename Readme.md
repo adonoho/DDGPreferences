@@ -3,7 +3,7 @@ use Apple's Settings app, some don't. If you develop many different
 applications, as I do in my development consulting practice, it is tedious to
 code up a custom preferences class for each app. My class, `DDGPreferences`, is
 an attempt to minimize the tedium by providing a very simple API to the
-NSUserDefaults class for both settings and custom preferences. In addition to
+`NSUserDefaults` class for both settings and custom preferences. In addition to
 `DDGPreferences`, I have included a set of standard logging macros, `DDGMacros`,
 and an example single view iOS app tying all of the pieces together.
 
@@ -33,12 +33,12 @@ the `Root.plist` in the `Settings.bundle`. In other words, each setting has an
 identifier/key which is identical to a property name. This post is not a
 tutorial on how to build an app that uses Apple's Settings application. That
 said the example app has only made minor changes to the fields created when
-you add a Settings.bundle to your app. (In particular, I changed the
+you add a `Settings.bundle` to your app. (In particular, I changed the
 Key/Identifier from using under bars, _, as word separators to using standard
 Cocoa camel case.) In other words, I believe a beginner should be able to
 follow the logic of using this class without too much difficulty.
 
-### How do you use `DDGPreferences`?
+### How do you use DDGPreferences?
 
 Using `DDGPreferences` is simple. Make your Preferences class a subclass of
 `DDGPreferences` and then instantiate it. Really, that is all you have to do.
@@ -59,7 +59,7 @@ the `UIApplicationDidBecomeActiveNotification`,
 shows one way to do this. All other coordination with the Settings app is
 handled by `DDGPreferences`.
 
-### The `DDGPreferences` app:
+### The DDGPreferences app:
 
 I've included an app showing how to use `DDGPreferences`. It is a single view
 iPhone app with an array of identical controls for both Apple's Settings app
