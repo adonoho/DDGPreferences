@@ -132,7 +132,7 @@ I, of course, encourage you to send in bug fixes and make suggestions to
 improve `DDGPreferences` for all of us.
 
    [1]: https://github.com/adonoho/DDGPreferences
-   [2]: http://blog.DDG.com/
+   [2]: http://blog.DDG.com/?p=53
 
 I hope you find `DDGPreferences` useful.
 
