@@ -61,9 +61,17 @@
 @private
 	BOOL dirty_;
 }
-@property(nonatomic, assign, readonly) BOOL doPreferencesExist;
 
 - (void)  readPreferences;
 - (void) writePreferences;
+
+@end
+
+@protocol DDGPreferences <NSObject>
+
+@optional
+
+#define kSetDefaultPreferences (@selector(setDefaultPreferences))
+- (void) setDefaultPreferences;
 
 @end

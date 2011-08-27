@@ -60,12 +60,12 @@
 - (void) observeNotifications;
 
 - (void) readSettingsDefaultValues;
+- (void) readPropertiesDefaultValues;
 
 @end
 
 @implementation DDGPreferences
 
-@dynamic doPreferencesExist;
 @dynamic settingsKeys;
 
 - (void) dealloc {
@@ -81,43 +81,6 @@
 } // -dealloc
 
 
-- (BOOL) doPreferencesExist {
-	
-	DDGTrace();
-	
-	unsigned int     propertyCount = 0;
-	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
-	NSString        *className     = [NSString stringWithUTF8String: class_getName([self class])];
-	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
-	
-	DDGDesc(defaults.dictionaryRepresentation);
-	
-    NSArray *settingsKeys = self.settingsKeys;
-    
-    BOOL exists = NO;
-    
-	// Loop through properties.
-	for (unsigned int i = 0; i < propertyCount; i++) {
-		
-		objc_property_t property = propertyList[i];
-		NSString       *key      = [NSString stringWithUTF8String: property_getName(property)];
-		NSString       *prefKey  = [NSString stringWithFormat: @"%@_%@", className, key];
-		
-        if (settingsKeys && ([settingsKeys indexOfObject: key] != NSNotFound)) { continue; }
-        
-        if ([defaults objectForKey: prefKey]) {
-            
-            exists = YES;
-            break;
-        }
-	}
-	free(propertyList); propertyList = NULL;
-    
-    return exists;
-	
-} // -doPreferencesExist
-
-
 - (id) init {
 	
 	DDGTrace();
@@ -130,6 +93,8 @@
         [self observeNotifications];
 
         [self readSettingsDefaultValues];
+        [self readPropertiesDefaultValues];
+        
 		[self readPreferences];
     }
 	return self;
@@ -289,6 +254,58 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 #pragma mark - Property Reading/Writing Methods
 
 
+- (BOOL) doPreferencesExist {
+	
+	DDGTrace();
+	
+	unsigned int     propertyCount = 0;
+	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
+	NSString        *className     = [NSString stringWithUTF8String: class_getName([self class])];
+	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
+	
+	DDGDesc(defaults.dictionaryRepresentation);
+	
+    NSArray *settingsKeys = self.settingsKeys;
+    
+    BOOL exists = NO;
+    
+	// Loop through properties.
+	for (unsigned int i = 0; i < propertyCount; i++) {
+		
+		objc_property_t property = propertyList[i];
+		NSString       *key      = [NSString stringWithUTF8String: property_getName(property)];
+		NSString       *prefKey  = [NSString stringWithFormat: @"%@_%@", className, key];
+		
+        if (settingsKeys && ([settingsKeys indexOfObject: key] != NSNotFound)) { continue; }
+        
+        if ([defaults objectForKey: prefKey]) {
+            
+            exists = YES;
+            break;
+        }
+	}
+	free(propertyList), propertyList = NULL;
+    
+    return exists;
+	
+} // -doPreferencesExist
+
+
+- (void) readPropertiesDefaultValues {
+    
+	DDGTrace();
+	
+    if ([self respondsToSelector: kSetDefaultPreferences]) {
+        
+        if (!self.doPreferencesExist) {
+            
+            [self performSelector: kSetDefaultPreferences];
+        }
+    }
+
+} // -readPropertiesDefaultValues
+
+
 - (void) setNilValueForKey: (NSString *) key {
     
     DDGDesc(key);
@@ -322,7 +339,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
             [self setValue: pref forKey: key];
         }
 	}
-	free(propertyList); propertyList = NULL;
+	free(propertyList), propertyList = NULL;
 	
 } // -readProperties
 
@@ -365,9 +382,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
             [defaults setObject: value forKey: prefKey];
         }
 	}
-	dirty_ = NO;
-    
-	free(propertyList); propertyList = NULL;
+	free(propertyList), propertyList = NULL;
 	
 } // -writeProperties
 
@@ -382,6 +397,8 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 
 	[[NSUserDefaults standardUserDefaults] synchronize];
 
+	dirty_ = NO;
+    
 } // -writePreferences
 
 
