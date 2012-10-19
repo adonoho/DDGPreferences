@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -43,50 +43,24 @@
  
  */
 
+#if !__has_feature(objc_arc)
+#  error Please compile this class with ARC (-fobjc-arc).
+#endif
+
 #import "Preferences.h"
 
-@interface Preferences () {
-
-@private
-    NSString *nameSetting_;
-    BOOL   enabledSetting_;
-    CGFloat sliderSetting_;
-
-    NSString *namePref_;
-    BOOL   enabledPref_;
-    CGFloat sliderPref_;
-    NSData   *rectPrefData_;
-}
+@interface Preferences ()
 @end
 
 @implementation Preferences
 
-@synthesize nameSetting = nameSetting_;
-@synthesize enabledSetting = enabledSetting_;
-@synthesize sliderSetting = sliderSetting_;
-
-@synthesize namePref = namePref_;
-@synthesize enabledPref = enabledPref_;
-@synthesize sliderPref = sliderPref_;
-@synthesize rectPrefData = rectPrefData_;
-
-- (void) dealloc {
-    
-    self.nameSetting = nil;
-    self.namePref = nil;
-    self.rectPrefData = nil;
-    
-    [super dealloc];
-    
-} // -dealloc
-
-
 - (NSString *) description {
     
     return [NSString stringWithFormat:
-            @"\n\tnameSetting: %@\n\tenabledSetting: %@\n\tsliderSetting: %f\n\tnamePref: %@\n\tenabledPref: %@\n\tsliderPref: %f\n\trectDataPref: %@",
+            @"\n\tnameSetting: %@\n\tenabledSetting: %@\n\tsliderSetting: %f\n\tnamePref: %@\n\tenabledPref: %@\n\tsliderPref: %f\n\trectDataPref: %@\n\tchoicesEnabledSetting: %@\n\tchoicesSliderSetting: %f",
             self.nameSetting, self.enabledSetting ? @"Yes" : @"No", self.sliderSetting,
-            self.namePref,    self.enabledPref    ? @"Yes" : @"No", self.sliderPref, self.rectPrefData];
+            self.namePref,    self.enabledPref    ? @"Yes" : @"No", self.sliderPref, self.rectPrefData,
+            self.choicesEnabledSetting    ? @"Yes" : @"No", self.choicesSliderSetting];
     
 } // -description
 

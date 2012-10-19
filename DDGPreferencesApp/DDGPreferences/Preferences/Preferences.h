@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -48,14 +48,17 @@
 
 @interface Preferences : DDGPreferences <DDGPreferences> 
 
-@property (nonatomic, copy)   NSString *nameSetting;
-@property (nonatomic, assign, getter=isEnabledSetting) BOOL enabledSetting;
-@property (nonatomic, assign) CGFloat sliderSetting;
+@property (copy, nonatomic)   NSString *nameSetting;
+@property (getter=isEnabledSetting, nonatomic) BOOL enabledSetting;
+@property (nonatomic) CGFloat sliderSetting;
 
-@property (nonatomic, copy)   NSString *namePref;
-@property (nonatomic, assign, getter=isEnabledPref) BOOL enabledPref;
-@property (nonatomic, assign) CGFloat sliderPref;
-@property (nonatomic, retain) NSData *rectPrefData;
+@property (copy, nonatomic)   NSString *namePref;
+@property (getter=isEnabledPref, nonatomic) BOOL enabledPref;
+@property (nonatomic) CGFloat sliderPref;
+@property (strong, nonatomic) NSData *rectPrefData;
+
+@property (getter=isChoicesEnabledSetting, nonatomic) BOOL choicesEnabledSetting;
+@property (nonatomic) CGFloat choicesSliderSetting;
 
 // Non-property accessors: Used to save structures in the preferences .plist.
 - (CGRect)  rectPref;
