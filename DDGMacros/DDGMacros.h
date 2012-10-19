@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //	Created by Andrew Donoho on 2009/05/20.
-//	Copyright 2009-2011 Donoho Design Group, L.L.C. All rights reserved.
+//	Copyright 2009-2012 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2009-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -47,9 +47,11 @@
 extern NSString *const kEmptyString;
 extern NSString *const kOKButton;
 extern NSString *const kNoButton;
+extern NSString *const kYesButton;
 extern NSString *const kCancelButton;
 extern NSString *const kTrue;
 extern NSString *const kFalse;
+extern const NSTimeInterval kDefaultDuration;
 
 //
 // Use the below line in your project settings to turn on DEBUG.
@@ -65,9 +67,9 @@ extern NSString *const kFalse;
 // void DDGTrace(void);
 //
 
+void _DDGTrace(const char *name, int line);
 #if (defined DEBUG && defined CLASS_DEBUG)
-#define DDGTrace() (DDGTrace_(__PRETTY_FUNCTION__, __LINE__))
-void DDGTrace_(const char *name, int line);
+#define DDGTrace() (_DDGTrace(__PRETTY_FUNCTION__, __LINE__))
 #else
 #define DDGTrace()
 #endif
@@ -77,9 +79,9 @@ void DDGTrace_(const char *name, int line);
 // void DDGDesc(id object);
 //
 
+void _DDGDesc(const char *name, int line, id object);
 #if (defined DEBUG && defined CLASS_DEBUG)
-#define DDGDesc(object) (DDGDesc_(__PRETTY_FUNCTION__, __LINE__, (object)))
-void DDGDesc_(const char *name, int line, id object);
+#define DDGDesc(object) (_DDGDesc(__PRETTY_FUNCTION__, __LINE__, (object)))
 #else
 #define DDGDesc(object)
 #endif
@@ -90,33 +92,33 @@ void DDGDesc_(const char *name, int line, id object);
 // void DDGLog(NSString *format, ...);
 //
 
+void _DDGLog(const char *name, int line, NSString *format, ...);
 #if (defined DEBUG && defined CLASS_DEBUG)
-#define DDGLog(format, ...) (DDGLog_(__PRETTY_FUNCTION__, __LINE__, (format), ##__VA_ARGS__))
-void DDGLog_(const char *name, int line, NSString *format, ...);
+#define DDGLog(format, ...) (_DDGLog(__PRETTY_FUNCTION__, __LINE__, (format), ##__VA_ARGS__))
 #else
 #define DDGLog(format, ...)
 #endif
 
+void _logSubviews(const char *name, int line, UIView *parent);
 #if (defined DEBUG && defined CLASS_DEBUG)
-#define logSubviews(view) (logSubviews_(__PRETTY_FUNCTION__, __LINE__, (view)))
-void logSubviews_(const char *name, int line, UIView *parent);
+#define logSubviews(view) (_logSubviews(__PRETTY_FUNCTION__, __LINE__, (view)))
 #else
 #define logSubviews(view)
 #endif
 
 
+NSUInteger _countSubviews(const char *name, int line, UIView *parent);
 #if (defined DEBUG && defined CLASS_DEBUG)
-#define countSubviews(view) (countSubviews_(__PRETTY_FUNCTION__, __LINE__, (view)))
-NSUInteger countSubviews_(const char *name, int line, UIView *parent);
+#define countSubviews(view) (_countSubviews(__PRETTY_FUNCTION__, __LINE__, (view)))
 #else
 #define countSubviews(view)
 #endif
 
 
 // Debugger trap. Set a breakpoint on the implementation.
+void _DDGDebugger(const char *name, int line);
 #if (defined DEBUG && defined CLASS_DEBUG)
-#define DDGDebugger() (DDGDebugger_(__PRETTY_FUNCTION__, __LINE__))
-void DDGDebugger_(const char *name, int line);
+#define DDGDebugger() (_DDGDebugger(__PRETTY_FUNCTION__, __LINE__))
 #else
 #define DDGDebugger()
 #endif
