@@ -3,7 +3,7 @@
 //  DDGPreferences
 //
 //  Created by Andrew Donoho on 2011/08/20.
-//  Copyright 2011 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2011-2012 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -49,15 +49,15 @@
 
 @interface DDGPreferencesViewController : UIViewController <UITextFieldDelegate>
 
-@property(nonatomic, retain) Preferences *prefs;
+@property (strong, nonatomic) Preferences *prefs;
 
-@property (nonatomic, retain) IBOutlet UITextField *nameSettingField;
-@property (nonatomic, retain) IBOutlet UISwitch *enabledSettingSwitch;
-@property (nonatomic, retain) IBOutlet UISlider *sliderSettingSlider;
+@property (weak, nonatomic) IBOutlet UITextField *nameSettingField;
+@property (weak, nonatomic) IBOutlet UISwitch *enabledSettingSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *sliderSettingSlider;
 
-@property (nonatomic, retain) IBOutlet UITextField *namePrefField;
-@property (nonatomic, retain) IBOutlet UISwitch *enabledPrefSwitch;
-@property (nonatomic, retain) IBOutlet UISlider *sliderPrefSlider;
-@property (nonatomic, retain) IBOutlet UILabel *rectPrefLabel;
+@property (weak, nonatomic) IBOutlet UITextField *namePrefField;
+@property (weak, nonatomic) IBOutlet UISwitch *enabledPrefSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *sliderPrefSlider;
+@property (weak, nonatomic) IBOutlet UILabel *rectPrefLabel;
 
 @end

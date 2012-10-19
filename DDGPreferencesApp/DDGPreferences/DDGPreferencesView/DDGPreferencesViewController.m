@@ -3,7 +3,7 @@
 //  DDGPreferences
 //
 //  Created by Andrew Donoho on 2011/08/20.
-//  Copyright 2011 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2011-2012 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -43,6 +43,10 @@
  
  */
 
+#if !__has_feature(objc_arc)
+#  error Please compile this class with ARC (-fobjc-arc).
+#endif
+
 #import "Preferences.h"
 
 #import "DDGPreferencesViewController.h"
@@ -50,34 +54,13 @@
 #define CLASS_DEBUG 1
 #import "DDGMacros.h"
 
-@interface DDGPreferencesViewController () {
+@interface DDGPreferencesViewController ()
 
-@private
-    Preferences *prefs_;
-    
-    UITextField *nameSettingField_;
-    UISwitch *enabledSettingSwitch_;
-    UISlider  *sliderSettingSlider_;
-
-    UITextField *namePrefField_;
-    UISwitch *enabledPrefSwitch_;
-    UISlider  *sliderPrefSlider_;
-    UILabel *rectPrefLabel_;
-}
 - (void) observeNotifications;
 
 @end
 
 @implementation DDGPreferencesViewController
-
-@synthesize prefs = prefs_;
-@synthesize nameSettingField = nameSettingField_;
-@synthesize enabledSettingSwitch = enabledSettingSwitch_;
-@synthesize sliderSettingSlider = sliderSettingSlider_;
-@synthesize namePrefField = namePrefField_;
-@synthesize enabledPrefSwitch = enabledPrefSwitch_;
-@synthesize sliderPrefSlider = sliderPrefSlider_;
-@synthesize rectPrefLabel = rectPrefLabel_;
 
 - (void) dealloc {
     
@@ -87,19 +70,6 @@
 
     [nc removeObserver: self];
     
-    self.prefs = nil;
-    
-    self.nameSettingField = nil;
-    self.enabledSettingSwitch = nil;
-    self.sliderSettingSlider = nil;
-
-    self.namePrefField = nil;
-    self.enabledPrefSwitch = nil;
-    self.sliderPrefSlider = nil;
-    self.rectPrefLabel = nil;
-    
-    [super dealloc];
-
 } // -dealloc
 
 
@@ -124,7 +94,7 @@
     
     [super viewDidLoad];
 
-    if (!self.prefs) { self.prefs = [[Preferences new] autorelease]; }
+    if (!self.prefs) { self.prefs = Preferences.new; }
     
     self.nameSettingField.text = self.prefs.nameSetting;
     self.enabledSettingSwitch.on = self.prefs.isEnabledSetting;
@@ -138,24 +108,6 @@
     [self observeNotifications];
 
 } // -viewDidLoad
-
-
-- (void) viewDidUnload {
-    
-    DDGTrace();
-    
-    [super viewDidUnload];
-
-    self.nameSettingField = nil;
-    self.enabledSettingSwitch = nil;
-    self.sliderSettingSlider = nil;
-    
-    self.namePrefField = nil;
-    self.enabledPrefSwitch = nil;
-    self.sliderPrefSlider = nil;
-    self.rectPrefLabel = nil;
-    
-} // -viewDidUnload
 
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation {
