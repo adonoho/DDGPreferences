@@ -43,24 +43,27 @@
  
  */
 
+#if !__has_feature(objc_arc)
+#  error Please compile this class with ARC (-fobjc-arc).
+#endif
+
 #import "DDGPreferencesAppDelegate.h"
 
 #import "DDGPreferencesViewController.h"
 
 @implementation DDGPreferencesAppDelegate
 
-
 @synthesize window=_window;
-
 @synthesize viewController=_viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     
-    self.window.rootViewController = self.viewController;
+
+    [self.window addSubview: self.viewController.view];
     [self.window makeKeyAndVisible];
-    return YES;
+    
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -100,13 +103,6 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-}
-
-- (void)dealloc
-{
-    [_window release];
-    [_viewController release];
-    [super dealloc];
 }
 
 @end

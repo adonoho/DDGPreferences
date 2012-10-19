@@ -3,7 +3,7 @@
 //  DDGPreferences
 //
 //  Created by Andrew Donoho on 2011/08/20.
-//  Copyright 2011 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2011-2012 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
