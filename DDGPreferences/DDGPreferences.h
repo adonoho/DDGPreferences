@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //  Created by Andrew Donoho on 2010/02/09.
-//  Copyright 2010-2011 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2010-2012 Donoho Design Group, L.L.C. All rights reserved.
 //
 //
 // Properties must have one of the standard .plist types:
@@ -23,7 +23,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -56,11 +56,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDGPreferences : NSObject {
-    
-@private
-	BOOL dirty_;
-}
+@interface DDGPreferences : NSObject 
 
 - (void)  readPreferences;
 - (void) writePreferences;

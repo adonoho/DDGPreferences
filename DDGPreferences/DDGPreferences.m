@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //  Created by Andrew Donoho on 2010/02/09.
-//  Copyright 2010-2011 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2010-2012 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2011 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -43,6 +43,10 @@
  
  */
 
+#if !__has_feature(objc_arc)
+#  error Please compile this class with ARC (-fobjc-arc).
+#endif
+
 #import "DDGPreferences.h"
 
 #import <objc/runtime.h>
@@ -50,7 +54,11 @@
 //#define CLASS_DEBUG 1
 #import "DDGMacros.h"
 
-@interface DDGPreferences () 
+@interface DDGPreferences () {
+    
+@private
+	BOOL _dirty;
+}
 
 @property(nonatomic, readonly) NSArray *settingsKeys;
 
@@ -75,8 +83,6 @@
     [self removeSelfObserver];
     
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    
-	[super dealloc];
     
 } // -dealloc
 
@@ -111,8 +117,11 @@ static NSString *const  kDefaultValue  = @"DefaultValue";
 static NSString *const  kSettings      = @"Settings.bundle";
 static NSString *const  kRoot          = @"Root.plist";
 static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
+static NSString *const  kType		   = @"Type";
+static NSString *const  kChildPane	   = @"PSChildPaneSpecifier";
+static NSString *const  kFile		   = @"File";
 
-- (NSMutableDictionary *) defaultSettings {
+- (NSMutableDictionary *) defaultSettings: (NSString *) prefList {
 	// Settings are always associated with this class, Preferences.
 	// Each setting is named identically to a property.
 	
@@ -121,7 +130,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 	NSString *path = nil;
 	path = [[NSBundle mainBundle] bundlePath];
 	path = [path stringByAppendingPathComponent: kSettings];
-	path = [path stringByAppendingPathComponent: kRoot];
+	path = [path stringByAppendingPathComponent: prefList];
 	
 	NSDictionary  *settingsDict = [NSDictionary dictionaryWithContentsOfFile: path];
 	
@@ -138,20 +147,33 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 			if (key) {
 				
 				[items setValue: [pref valueForKey: kDefaultValue] forKey: key];
+			} 
+			else { // check to see if this is a child pane
+			
+				NSString *type = [pref valueForKey: kType];
+				
+				if ([type isEqualToString: kChildPane]) {
+				
+					NSString *child = [pref valueForKey: kFile];
+					
+					child = [child stringByAppendingString:@".plist"];
+					
+					[items addEntriesFromDictionary: [self defaultSettings: child]];
+				}
 			}
 		}
 		return items;
 	}
 	return nil;
 	
-} // -defaultSettings
+} // -defaultSettings:
 
 
 - (NSArray *) settingsKeys {
 
 	DDGTrace();
 	
-    return [[self defaultSettings] allKeys];
+    return [[self defaultSettings: kRoot] allKeys];
     	
 } // -settingsKeys
 
@@ -160,7 +182,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 	
 	DDGTrace();
 	
-	NSMutableDictionary *items = [self defaultSettings];
+	NSMutableDictionary *items = [self defaultSettings: kRoot];
 	
 	if (items.count) {
 		
@@ -299,7 +321,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
         
         if (!self.doPreferencesExist) {
             
-            [self performSelector: kSetDefaultPreferences];
+            [(id<DDGPreferences>)self setDefaultPreferences];
         }
     }
 
@@ -397,7 +419,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 
 	[[NSUserDefaults standardUserDefaults] synchronize];
 
-	dirty_ = NO;
+	_dirty = NO;
     
 } // -writePreferences
 
@@ -414,7 +436,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 	
 	if ([change valueForKey: NSKeyValueChangeNewKey]) {
         
-		dirty_ = YES;
+		_dirty = YES;
 	}
 	
 } // -observeValueForKeyPath:ofObject:change:context:
@@ -470,7 +492,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 	
 	DDGTrace();
 	
-	if (dirty_) {
+	if (_dirty) {
 		
 		[self writePreferences];
 	}
@@ -481,7 +503,7 @@ static NSString *const  kPrefSpecifier = @"PreferenceSpecifiers";
 #define kApplicationDidEnterBackground  (@selector(applicationDidEnterBackground:))
 - (void) applicationDidEnterBackground: (NSNotification *) notification {
 	
-	if (dirty_) {
+	if (_dirty) {
 		
 		[self writePreferences];
 	}
