@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE01A78A13FFF08D00880130 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78913FFF08D00880130 /* UIKit.framework */; };
+		CE01A78A13FFF08D00880130 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78913FFF08D00880130 /* UIKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CE01A78C13FFF08D00880130 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78B13FFF08D00880130 /* Foundation.framework */; };
 		CE01A78E13FFF08D00880130 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE01A78D13FFF08D00880130 /* CoreGraphics.framework */; };
 		CE01A79413FFF08D00880130 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE01A79213FFF08D00880130 /* InfoPlist.strings */; };
 		CE01A79713FFF08D00880130 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01A79613FFF08D00880130 /* main.m */; };
 		CE01A79D13FFF08D00880130 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01A79B13FFF08D00880130 /* MainWindow.xib */; };
 		CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01A7A113FFF08D00880130 /* DDGPreferencesViewController.xib */; };
-		CE1D1EE813FFFD8D00EE44A0 /* DDGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */; };
+		CE1D1EE813FFFD8D00EE44A0 /* DDGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CE1D1EED13FFFE9600EE44A0 /* DDGMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */; };
-		CE1D1EF81400038700EE44A0 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF71400038700EE44A0 /* Preferences.m */; };
-		CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */; };
-		CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */; };
+		CE1D1EF81400038700EE44A0 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF71400038700EE44A0 /* Preferences.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEA28E1F13FFF572005EB7CD /* Settings.bundle */; };
 		CEC241B9140404A700CED701 /* DDG Square 57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC241B8140404A700CED701 /* DDG Square 57x57.png */; };
 		CED4991C14030C0500466BE3 /* DDG Square.png in Resources */ = {isa = PBXBuildFile; fileRef = CED4991B14030C0500466BE3 /* DDG Square.png */; };
@@ -48,6 +48,7 @@
 		CEA28E1F13FFF572005EB7CD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CEC241B8140404A700CED701 /* DDG Square 57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square 57x57.png"; sourceTree = "<group>"; };
 		CED4991B14030C0500466BE3 /* DDG Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square.png"; sourceTree = "<group>"; };
+		CED95443144103BA00B95B2E /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +85,7 @@
 		CE01A78813FFF08D00880130 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CED95443144103BA00B95B2E /* libSystem.B.dylib */,
 				CE01A78913FFF08D00880130 /* UIKit.framework */,
 				CE01A78B13FFF08D00880130 /* Foundation.framework */,
 				CE01A78D13FFF08D00880130 /* CoreGraphics.framework */,
@@ -193,6 +195,7 @@
 		CE01A77C13FFF08D00880130 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Donoho Design Group, L.L.C.";
 			};
 			buildConfigurationList = CE01A77F13FFF08D00880130 /* Build configuration list for PBXProject "DDGPreferences" */;
@@ -318,8 +321,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DDGPreferences/DDGPreferences-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -334,8 +338,9 @@
 				GCC_PREFIX_HEADER = "DDGPreferences/DDGPreferences-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DDGPreferences/DDGPreferences-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
