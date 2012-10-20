@@ -48,12 +48,8 @@
 
 @interface CloudPreferences : DDGCloudPreferences
 
-@property (copy, nonatomic)   NSString *nameSetting;
-@property (getter=isEnabledSetting, nonatomic) BOOL enabledSetting;
-@property (nonatomic) CGFloat sliderSetting;
-
 @property (copy, nonatomic)   NSString *namePref;
-@property (getter=isEnabledPref, nonatomic) BOOL enabledPref;
+@property (getter = isEnabledPref, nonatomic) BOOL enabledPref;
 @property (nonatomic) CGFloat sliderPref;
 @property (strong, nonatomic) NSData *rectPrefData;
 
