@@ -49,6 +49,11 @@
 
 #import "Preferences.h"
 
+#import "NSData+DDGValue.h"
+
+#define CLASS_DEBUG 1
+#import "DDGMacros.h"
+
 @interface Preferences ()
 @end
 
@@ -67,16 +72,27 @@
 
 - (CGRect) rectPref {
     
-    return [[NSKeyedUnarchiver unarchiveObjectWithData: self.rectPrefData] CGRectValue];
+    NSData *rectData = self.rectPrefData;
+
+    if (rectData.length > sizeof(CGRect)) { // Guard against leftover archived data.
+        
+        return [[NSKeyedUnarchiver unarchiveObjectWithData: self.rectPrefData] CGRectValue];
+    }
+    DDGDesc(NSStringFromCGRect(rectData.CGRectValue));
+
+    return rectData.CGRectValue;
     
 } // -rectPref
 
 
 - (void) setRectPref: (CGRect) rect {
 
-    self.rectPrefData = [NSKeyedArchiver archivedDataWithRootObject: 
-                         [NSValue valueWithCGRect: rect]];
+    DDGDesc(NSStringFromCGRect(self.rectPrefData.CGRectValue));
+    
+    self.rectPrefData = [NSData dataWithCGRect: rect];
 
+    DDGDesc(NSStringFromCGRect(self.rectPrefData.CGRectValue));
+    
 } // -setRectPref:
 
 
