@@ -56,7 +56,11 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kDirtyKey;
+
 @interface DDGPreferences : NSObject 
+
+@property (getter = isDirty, readonly, nonatomic) BOOL dirty;
 
 - (void)  readPreferences;
 - (void) writePreferences;

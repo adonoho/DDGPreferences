@@ -51,16 +51,15 @@
 
 #import <objc/runtime.h>
 
-//#define CLASS_DEBUG 1
+#define CLASS_DEBUG 1
 #import "DDGMacros.h"
 
-@interface DDGPreferences () {
-    
-@private
-	BOOL _dirty;
-}
+NSString *const kDirtyKey = @"dirty";
 
-@property(nonatomic, readonly) NSArray *settingsKeys;
+@interface DDGPreferences ()
+
+@property (getter = isDirty, readwrite, nonatomic) BOOL dirty;
+@property (strong, readonly, nonatomic) NSArray *settingsKeys;
 
 - (void) observeProperties;
 - (void) removeSelfObserver;
@@ -95,13 +94,13 @@
 	
 	if (self) {
 		
-		[self observeProperties];
-        [self observeNotifications];
-
         [self readSettingsDefaultValues];
         [self readPropertiesDefaultValues];
         
 		[self readPreferences];
+        
+		[self observeProperties];
+        [self observeNotifications];
     }
 	return self;
 	
@@ -186,14 +185,14 @@ static NSString *const  kFile		   = @"File";
 	
 	if (items.count) {
 		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString       *selfName = [NSString stringWithUTF8String: class_getName([self class])];
+		NSUserDefaults *defaults  = [NSUserDefaults standardUserDefaults];
+        const char     *className = class_getName(self.class);
         
         [defaults registerDefaults: items];
         
         for (NSString *key in items.allKeys) {
             
-            NSString *prefKey = [NSString stringWithFormat: @"%@_%@", selfName, key];
+            NSString *prefKey = [NSString.alloc initWithFormat: @"%s_%@", className, key];
             
             if (![defaults objectForKey: prefKey]) {
                 
@@ -212,16 +211,16 @@ static NSString *const  kFile		   = @"File";
 	
 	DDGTrace();
 	
-	NSArray *keys = [self settingsKeys];
+	NSArray *settingsKeys = self.settingsKeys;
 	
-	if (keys.count) {
+	if (settingsKeys.count) {
 		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString       *selfName = [NSString stringWithUTF8String: class_getName([self class])];
+		NSUserDefaults *defaults  = [NSUserDefaults standardUserDefaults];
+        const char     *className = class_getName(self.class);
         
-        for (NSString *key in keys) {
+        for (NSString *key in settingsKeys) {
             
-            NSString *prefKey = [NSString stringWithFormat: @"%@_%@", selfName, key];
+            NSString *prefKey = [NSString.alloc initWithFormat: @"%s_%@", className, key];
 
             id value = [defaults objectForKey: key];
             id pref  = [defaults objectForKey: prefKey];
@@ -247,18 +246,18 @@ static NSString *const  kFile		   = @"File";
 	
 	DDGTrace();
 	
-	NSArray *keys = [self settingsKeys];
+	NSArray *keys = self.settingsKeys;
 	
 	if (keys.count) {
 		
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString       *selfName = [NSString stringWithUTF8String: class_getName([self class])];
+		NSUserDefaults *defaults  = [NSUserDefaults standardUserDefaults];
+        const char     *className = class_getName(self.class);
         
         DDGDesc(self);
 
         for (NSString *key in keys) {
             
-            NSString *prefKey = [NSString stringWithFormat: @"%@_%@", selfName, key];
+            NSString *prefKey = [NSString.alloc initWithFormat: @"%s_%@", className, key];
 
             id value = [defaults objectForKey: key];
             id pref  = [defaults objectForKey: prefKey];
@@ -282,7 +281,7 @@ static NSString *const  kFile		   = @"File";
 	
 	unsigned int     propertyCount = 0;
 	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
-	NSString        *className     = [NSString stringWithUTF8String: class_getName([self class])];
+	const char      *className     = class_getName(self.class);
 	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
 	
 	DDGDesc(defaults.dictionaryRepresentation);
@@ -294,10 +293,12 @@ static NSString *const  kFile		   = @"File";
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
 		
-		objc_property_t property = propertyList[i];
-		NSString       *key      = [NSString stringWithUTF8String: property_getName(property)];
-		NSString       *prefKey  = [NSString stringWithFormat: @"%@_%@", className, key];
-		
+        const char *propName = property_getName(propertyList[i]);
+		NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
+        NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                       length: strlen( propName)
+                                                     encoding: NSUTF8StringEncoding
+                                                 freeWhenDone: NO];
         if (settingsKeys && ([settingsKeys indexOfObject: key] != NSNotFound)) { continue; }
         
         if ([defaults objectForKey: prefKey]) {
@@ -340,8 +341,8 @@ static NSString *const  kFile		   = @"File";
 	DDGTrace();
 	
 	unsigned int     propertyCount = 0;
-	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
-	NSString        *className     = [NSString stringWithUTF8String: class_getName([self class])];
+	objc_property_t *propertyList  = class_copyPropertyList(self.class, &propertyCount);
+	const char      *className     = class_getName(self.class);
 	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
 	
 	DDGDesc(defaults.dictionaryRepresentation);
@@ -349,10 +350,12 @@ static NSString *const  kFile		   = @"File";
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
 		
-		objc_property_t property = propertyList[i];
-		NSString       *key      = [NSString stringWithUTF8String: property_getName(property)];
-		NSString       *prefKey  = [NSString stringWithFormat: @"%@_%@", className, key];
-		
+        const char *propName = property_getName(propertyList[i]);
+		NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
+        NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                      length: strlen( propName)
+                                                    encoding: NSUTF8StringEncoding
+                                                freeWhenDone: NO];
         id value = [self     valueForKey:  key];
         id pref  = [defaults objectForKey: prefKey];
         
@@ -374,6 +377,8 @@ static NSString *const  kFile		   = @"File";
 	[self readSettings];
 
 	[self readProperties];
+    
+    self.dirty = NO;
 	
 } // readPreferences
 
@@ -384,7 +389,7 @@ static NSString *const  kFile		   = @"File";
 	
 	unsigned int     propertyCount = 0;
 	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
-	NSString        *className     = [NSString stringWithUTF8String: class_getName([self class])];
+	const char      *className     = class_getName(self.class);
 	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
 	
 	DDGDesc(defaults.dictionaryRepresentation);
@@ -392,10 +397,12 @@ static NSString *const  kFile		   = @"File";
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
 		
-		objc_property_t property = propertyList[i];
-		NSString       *key      = [NSString stringWithUTF8String: property_getName(property)];
-		NSString       *prefKey  = [NSString stringWithFormat: @"%@_%@", className, key];
-		
+        const char *propName = property_getName(propertyList[i]);
+		NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
+        NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                       length: strlen( propName)
+                                                     encoding: NSUTF8StringEncoding
+                                                 freeWhenDone: NO];
         id value = [self     valueForKey:  key];
         id pref  = [defaults objectForKey: prefKey];
         
@@ -417,9 +424,9 @@ static NSString *const  kFile		   = @"File";
     
     [self writeSettings];
 
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	[NSUserDefaults.standardUserDefaults synchronize];
 
-	_dirty = NO;
+	self.dirty = NO;
     
 } // -writePreferences
 
@@ -428,15 +435,18 @@ static NSString *const  kFile		   = @"File";
 
 
 - (void) observeValueForKeyPath: (NSString *) keyPath 
-					   ofObject: (id) object 
+					   ofObject: (id<NSObject>) object 
 						 change: (NSDictionary *) change 
 						context: (void *) context {
     
 	DDGTrace();
 	
-	if ([change valueForKey: NSKeyValueChangeNewKey]) {
+    id<NSObject> newValue = [change valueForKey: NSKeyValueChangeNewKey];
+    id<NSObject> oldValue = [change valueForKey: NSKeyValueChangeOldKey];
+
+	if (newValue && ![newValue isEqual: oldValue]) {
         
-		_dirty = YES;
+		self.dirty = YES;
 	}
 	
 } // -observeValueForKeyPath:ofObject:change:context:
@@ -452,11 +462,14 @@ static NSString *const  kFile		   = @"File";
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
 		
-        NSString *name = [NSString stringWithUTF8String: property_getName(propertyList[i])];
-        
-		[self addObserver: self 
+        const char *propName = property_getName(propertyList[i]);
+        NSString *name = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                      length: strlen( propName)
+                                                    encoding: NSUTF8StringEncoding
+                                                freeWhenDone: NO];
+		[self addObserver: self
                forKeyPath: name
-                  options: NSKeyValueObservingOptionNew 
+                  options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                   context: nil];
 	}
 	free(propertyList), propertyList = NULL;
@@ -474,9 +487,11 @@ static NSString *const  kFile		   = @"File";
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
 		
-        NSString *name = [NSString stringWithUTF8String: 
-                          property_getName(propertyList[i])];
-        
+        const char *propName = property_getName(propertyList[i]);
+        NSString *name = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                      length: strlen( propName)
+                                                    encoding: NSUTF8StringEncoding
+                                                freeWhenDone: NO];
 		[self removeObserver: self forKeyPath: name];
 	}
 	free(propertyList), propertyList = NULL;
@@ -492,7 +507,7 @@ static NSString *const  kFile		   = @"File";
 	
 	DDGTrace();
 	
-	if (_dirty) {
+	if (self.isDirty) {
 		
 		[self writePreferences];
 	}
@@ -503,11 +518,11 @@ static NSString *const  kFile		   = @"File";
 #define kApplicationDidEnterBackground  (@selector(applicationDidEnterBackground:))
 - (void) applicationDidEnterBackground: (NSNotification *) notification {
 	
-	if (_dirty) {
+	if (self.isDirty) {
 		
 		[self writePreferences];
 	}
-	DDGDesc([[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+	DDGDesc(NSUserDefaults.standardUserDefaults.dictionaryRepresentation);
     	
 } // -applicationDidEnterBackground:
 
@@ -517,7 +532,7 @@ static NSString *const  kFile		   = @"File";
 	
 	[[NSUserDefaults standardUserDefaults] synchronize];
 
-	DDGDesc([[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+	DDGDesc(NSUserDefaults.standardUserDefaults.dictionaryRepresentation);
     
     [self readSettings];
 	
