@@ -51,10 +51,14 @@
 
 #import "DDGPreferencesViewController.h"
 
+#import "CloudPreferences.h"
+
 #define CLASS_DEBUG 1
 #import "DDGMacros.h"
 
 @interface DDGPreferencesViewController ()
+
+@property (strong, nonatomic) CloudPreferences *cloudPrefs;
 
 - (void) observeNotifications;
 
@@ -66,9 +70,7 @@
     
     DDGTrace();
     
-    NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
-
-    [nc removeObserver: self];
+    [NSNotificationCenter.defaultCenter removeObserver: self];
     
 } // -dealloc
 
@@ -88,13 +90,7 @@
 #pragma mark - UIViewController view lifecycle methods
 
 
-- (void) viewDidLoad {
-    
-    DDGTrace();
-    
-    [super viewDidLoad];
-
-    if (!self.prefs) { self.prefs = Preferences.new; }
+- (void) refreshUI {
     
     self.nameSettingField.text = self.prefs.nameSetting;
     self.enabledSettingSwitch.on = self.prefs.isEnabledSetting;
@@ -104,6 +100,22 @@
     self.enabledPrefSwitch.on = self.prefs.isEnabledPref;
     self.sliderPrefSlider.value = self.prefs.sliderPref;
     self.rectPrefLabel.text = NSStringFromCGRect(self.prefs.rectPref);
+    
+} // -refreshUI
+
+
+- (void) viewDidLoad {
+    
+    DDGTrace();
+    
+    [super viewDidLoad];
+
+    if (!self.prefs) {
+        
+        self.prefs = Preferences.new;
+        self.cloudPrefs = [CloudPreferences.alloc initWithPreferences: self.prefs];
+    }
+    [self refreshUI];
     
     [self observeNotifications];
 
@@ -135,6 +147,16 @@
 
 
 #pragma mark - UIApplication notification methods
+
+
+#define kCloudKeyValueStoreDidChangeExternally  (@selector(cloudKeyValueStoreDidChangeExternally:))
+- (void) cloudKeyValueStoreDidChangeExternally: (NSNotification *) notification {
+
+	DDGTrace();
+    
+    dispatch_async(dispatch_get_main_queue(), ^{ [self refreshUI]; });
+    
+} // -cloudKeyValueStoreDidChangeExternally:
 
 
 #define kApplicationDidBecomeActive  (@selector(applicationDidBecomeActive:))
@@ -177,7 +199,12 @@
     
     [nc removeObserver: self];
 
-    [nc addObserver: self 
+    [nc addObserver: self
+           selector:       kCloudKeyValueStoreDidChangeExternally
+               name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+             object: NSUbiquitousKeyValueStore.defaultStore];
+    
+    [nc addObserver: self
            selector:  kApplicationDidBecomeActive 
                name: UIApplicationDidBecomeActiveNotification 
              object: nil];
