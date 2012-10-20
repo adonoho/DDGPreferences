@@ -60,4 +60,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *sliderPrefSlider;
 @property (weak, nonatomic) IBOutlet UILabel *rectPrefLabel;
 
+- (IBAction) pushToCloud: (UIButton *) sender;
+- (IBAction) randomRect:  (UIButton *) sender;
+
 @end

@@ -93,15 +93,28 @@
 - (void) refreshUI {
     
     self.nameSettingField.text = self.prefs.nameSetting;
-    self.enabledSettingSwitch.on = self.prefs.isEnabledSetting;
-    self.sliderSettingSlider.value = self.prefs.sliderSetting;
+    [self.enabledSettingSwitch setOn:    self.prefs.isEnabledSetting animated: YES];
+    [self.sliderSettingSlider  setValue: self.prefs.sliderSetting    animated: YES];
     
     self.namePrefField.text = self.prefs.namePref;
-    self.enabledPrefSwitch.on = self.prefs.isEnabledPref;
-    self.sliderPrefSlider.value = self.prefs.sliderPref;
+    [self.enabledPrefSwitch setOn:    self.prefs.isEnabledPref animated: YES];
+    [self.sliderPrefSlider  setValue: self.prefs.sliderPref    animated: YES];
     self.rectPrefLabel.text = NSStringFromCGRect(self.prefs.rectPref);
     
 } // -refreshUI
+
+
+- (void) refreshPrefs {
+    
+    self.prefs.nameSetting = self.nameSettingField.text;
+    self.prefs.enabledSetting = self.enabledSettingSwitch.on;
+    self.prefs.sliderSetting = self.sliderSettingSlider.value;
+    
+    self.prefs.namePref = self.namePrefField.text;
+    self.prefs.enabledPref = self.enabledPrefSwitch.on;
+    self.prefs.sliderPref = self.sliderPrefSlider.value;
+    
+} // -refreshPrefs
 
 
 - (void) viewDidLoad {
@@ -146,6 +159,35 @@
 } // -textFieldShouldReturn:
 
 
+#pragma mark - IBAction methods
+
+
+- (IBAction) pushToCloud: (UIButton *) sender {
+    
+    DDGDesc(self);
+    
+    [self refreshPrefs];
+    
+    [self.prefs writePreferences];
+    
+} // -pushToCloud:
+
+
+- (IBAction) randomRect: (UIButton *) sender {
+    
+    CGRect rect = CGRectZero;
+    
+    rect.origin = CGPointMake(arc4random_uniform(320), arc4random_uniform(320));
+    rect.size   = CGSizeMake( arc4random_uniform(320), arc4random_uniform(320));
+    
+    rect = CGRectIntersection(self.view.bounds, rect);
+    
+    self.prefs.rectPref = rect;
+    self.rectPrefLabel.text = NSStringFromCGRect(rect);
+
+} // -randomRect:
+
+
 #pragma mark - UIApplication notification methods
 
 
@@ -154,6 +196,7 @@
 
 	DDGTrace();
     
+    // Ensure all listeners for this notification are done before refreshing the UI.
     dispatch_async(dispatch_get_main_queue(), ^{ [self refreshUI]; });
     
 } // -cloudKeyValueStoreDidChangeExternally:
@@ -164,10 +207,8 @@
 
     DDGDesc(self);
     
-    self.nameSettingField.text = self.prefs.nameSetting;
-    self.enabledSettingSwitch.on = self.prefs.enabledSetting;
-    self.sliderSettingSlider.value = self.prefs.sliderSetting;
-
+    [self refreshUI];
+    
 } // -applicationDidBecomeActive:
 
 
@@ -176,17 +217,7 @@
     
     DDGDesc(self);
     
-    //
-    // The below code causes, IMO, too many saves of the Preferences.
-    // It is here for the purposes of pedagogy.
-    //
-    self.prefs.nameSetting = self.nameSettingField.text;
-    self.prefs.enabledSetting = self.enabledSettingSwitch.on;
-    self.prefs.sliderSetting = self.sliderSettingSlider.value;
-    
-    self.prefs.namePref = self.namePrefField.text;
-    self.prefs.enabledPref = self.enabledPrefSwitch.on;
-    self.prefs.sliderPref = self.sliderPrefSlider.value;
+    [self refreshPrefs];
     
 } // -applicationWillResignActive:
 
