@@ -131,9 +131,7 @@ common structures around. As I was passing a CGRect between devices, I
 chose to implement the same methods on NSData. These are defined in
 `NSData+DDGValue.h/m`. I also include a general method of creating an
 NSData from any NSValue. (This method is based upon ideas and code
-expressed on [Stack Overflow by Steffen
-Itterheim](http://stackoverflow.com/questions/8447380/how-to-convert-
-nsvalue-to-nsdata-and-back).)
+expressed on [Stack Overflow by Steffen Itterheim](http://stackoverflow.com/questions/8447380/how-to-convert-nsvalue-to-nsdata-and-back).)
 
 As `DDGPreferences` uses the properties to determine what needs to be
 persisted, you cannot just define a `@property` for your class that is
