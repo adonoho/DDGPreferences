@@ -1,0 +1,7 @@
+# Xcode noise.
+build/*
+*.xcuserstate
+*.pbxuser
+
+# OS X noise.
+.DS_Store
