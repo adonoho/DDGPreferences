@@ -128,11 +128,18 @@
         self.prefs = Preferences.new;
         self.cloudPrefs = [CloudPreferences.alloc initWithPreferences: self.prefs];
     }
-    [self refreshUI];
-    
     [self observeNotifications];
 
 } // -viewDidLoad
+
+
+- (void) viewWillAppear: (BOOL) animated {
+
+    [super viewWillAppear: animated];
+    
+    [self refreshUI];
+
+} // -viewWillAppear:
 
 
 - (BOOL) shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation) interfaceOrientation {
