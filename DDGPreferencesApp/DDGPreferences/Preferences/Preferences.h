@@ -3,7 +3,7 @@
 //  DDGPreferences
 //
 //  Created by Andrew Donoho on 2011/08/20.
-//  Copyright 2011 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2011-2014 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -55,7 +55,7 @@
 @property (copy, nonatomic)   NSString *namePref;
 @property (getter=isEnabledPref, nonatomic) BOOL enabledPref;
 @property (nonatomic) CGFloat sliderPref;
-@property (strong, nonatomic) NSData *rectPrefData;
+@property (nonatomic) NSData *rectPrefData;
 
 @property (getter=isChoicesEnabledSetting, nonatomic) BOOL choicesEnabledSetting;
 @property (nonatomic) CGFloat choicesSliderSetting;

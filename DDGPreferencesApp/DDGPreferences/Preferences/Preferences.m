@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2014 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -49,8 +49,6 @@
 
 #import "Preferences.h"
 
-#import "NSData+DDGValue.h"
-
 #define CLASS_DEBUG 1
 #import "DDGMacros.h"
 
@@ -71,28 +69,22 @@
 
 
 - (CGRect) rectPref {
-    
-    NSData *rectData = self.rectPrefData;
 
-    if (rectData.length > sizeof(CGRect)) { // Guard against leftover archived data.
-        
-        return [[NSKeyedUnarchiver unarchiveObjectWithData: self.rectPrefData] CGRectValue];
+    if (self.rectPrefData.length <= sizeof(CGRect) * 2) {
+        // Throw away the value based rect.
+
+        self.rectPref = CGRectMake(10.0f, 20.0f, 40.0f, 80.0f);
     }
-    DDGDesc(NSStringFromCGRect(rectData.CGRectValue));
+    return [[NSKeyedUnarchiver unarchiveObjectWithData: self.rectPrefData] CGRectValue];
 
-    return rectData.CGRectValue;
-    
 } // -rectPref
 
 
 - (void) setRectPref: (CGRect) rect {
 
-    DDGDesc(NSStringFromCGRect(self.rectPrefData.CGRectValue));
-    
-    self.rectPrefData = [NSData dataWithCGRect: rect];
+    self.rectPrefData = [NSKeyedArchiver archivedDataWithRootObject:
+                         [NSValue valueWithCGRect: rect]];
 
-    DDGDesc(NSStringFromCGRect(self.rectPrefData.CGRectValue));
-    
 } // -setRectPref:
 
 
