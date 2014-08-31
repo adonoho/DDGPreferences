@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //	Created by Andrew Donoho on 2009/05/20.
-//	Copyright 2009-2012 Donoho Design Group, L.L.C. All rights reserved.
+//	Copyright 2009-2014 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2009-2012 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2009-2014 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -43,6 +43,8 @@
  
  */
 
+@import UIKit;
+
 // Miscellaneous Constants
 extern NSString *const kEmptyString;
 extern NSString *const kOKButton;
@@ -53,6 +55,15 @@ extern NSString *const kTrue;
 extern NSString *const kFalse;
 extern const NSTimeInterval kDefaultDuration;
 
+@interface DDGMacros : NSObject
+
++ (void) logAllNotifications;
+
+@end
+
+#if TARGET_OS_IPHONE
+static inline BOOL iPadIdiom(void) { return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad; };
+#endif
 //
 // Use the below line in your project settings to turn on DEBUG.
 // GCC_PREPROCESSOR_DEFINITIONS == DEBUG=1
@@ -60,8 +71,6 @@ extern const NSTimeInterval kDefaultDuration;
 // And put the following in whichever class you need to log:
 // #define CLASS_DEBUG 1
 // #import "DDGMacros.h"
-//
-
 //
 // Log the function name and line number using DDGTrace().
 // void DDGTrace(void);
@@ -87,6 +96,19 @@ void _DDGDesc(const char *name, int line, id object);
 #endif
 
 //
+// Log the description, function name and line number.
+// This is the same as DDGDesc with the exception that it is always
+// available in every class during DEBUG.
+// void DDGError(NSError *error);
+//
+
+#ifdef DEBUG
+#define DDGError(error) (_DDGDesc(__PRETTY_FUNCTION__, __LINE__, (error)))
+#else
+#define DDGError(error)
+#endif
+
+//
 // DDGLog() is a parameter identical substitute for NSLog() which also 
 //   logs the function name and line number.
 // void DDGLog(NSString *format, ...);
@@ -98,22 +120,6 @@ void _DDGLog(const char *name, int line, NSString *format, ...);
 #else
 #define DDGLog(format, ...)
 #endif
-
-void _logSubviews(const char *name, int line, UIView *parent);
-#if (defined DEBUG && defined CLASS_DEBUG)
-#define logSubviews(view) (_logSubviews(__PRETTY_FUNCTION__, __LINE__, (view)))
-#else
-#define logSubviews(view)
-#endif
-
-
-NSUInteger _countSubviews(const char *name, int line, UIView *parent);
-#if (defined DEBUG && defined CLASS_DEBUG)
-#define countSubviews(view) (_countSubviews(__PRETTY_FUNCTION__, __LINE__, (view)))
-#else
-#define countSubviews(view)
-#endif
-
 
 // Debugger trap. Set a breakpoint on the implementation.
 void _DDGDebugger(const char *name, int line);
