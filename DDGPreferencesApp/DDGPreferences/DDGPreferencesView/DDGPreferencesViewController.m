@@ -214,8 +214,8 @@
 
     DDGDesc(self);
     
-    [self refreshUI];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{ [self refreshUI]; });
+
 } // -applicationDidBecomeActive:
 
 
