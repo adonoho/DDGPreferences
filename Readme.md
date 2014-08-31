@@ -1,4 +1,4 @@
-## An iOS v8 incompatibility has surfaced in this code.
+## A Xcode6 incompatibility has surfaced in this code.
 
 The git branch `development-xc6` contains the fixes and improvements to the app for iOS v7 and later. If you wish to ship your app on a new version of the OS in the fall compiled by Xcode v6, I recommend that you use this version. Once the NDA is removed by Apple, I will describe the cause of the bug and fixes to this class.
 
