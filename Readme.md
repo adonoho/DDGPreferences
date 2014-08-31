@@ -1,3 +1,9 @@
+## A Xcode6 incompatibility has surfaced in this code.
+
+The git branch `development-xc6` contains the fixes and improvements to the app for iOS v7 and later. If you wish to ship your app on a new version of the OS in the fall compiled by Xcode v6, I recommend that you use this version. Once the NDA is removed by Apple, I will describe the cause of the bug and fixes to this class.
+
+## DDGPreferences:
+
 Almost every iOS application has individual user preferences. Some apps also
 use Apple's Settings app, some don't. If you develop many different
 applications, as I do in my development consulting practice, it is tedious to
@@ -9,7 +15,7 @@ and an example single view iOS app tying all of the pieces together.
 
 The `DDGPreferences` project now supports syncing preferences through
 iCloud via the `NSUbiquitousKeyValueStore`. You can synchronize a subset
-all of your preferences to iCloud.
+of your preferences to iCloud.
 
 ## The API
 
@@ -188,10 +194,8 @@ some folks will write asking to be relieved of my public recognition
 requirement. Unless the requestor is willing to compensate me to change the
 licensing terms, I will always decline to change my agreement. I have put some
 time and care into crafting this class, app and this blog post. That time
-deserves compensation. I have chosen to be compensated by using this class as
-a marketing mechanism. I apologize if this does not align with your open
-source values. I have a family to feed and a mortgage to service. I sell
-coding services and code to provide for all of us. I hope you understand.
+deserves compensation and I have chosen to be compensated by using this class as
+a marketing mechanism. I hope you understand.
 
 ### Where to get the code:
 
