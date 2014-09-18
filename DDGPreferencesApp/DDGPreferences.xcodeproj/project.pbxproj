@@ -14,17 +14,16 @@
 		CE01A79713FFF08D00880130 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01A79613FFF08D00880130 /* main.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CE01A79D13FFF08D00880130 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01A79B13FFF08D00880130 /* MainWindow.xib */; };
 		CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE01A7A113FFF08D00880130 /* DDGPreferencesViewController.xib */; };
-		CE0BDE68163321C3002F6C00 /* NSData+DDGValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BDE67163321C3002F6C00 /* NSData+DDGValue.m */; };
 		CE1D1EE813FFFD8D00EE44A0 /* DDGPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CE1D1EED13FFFE9600EE44A0 /* DDGMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CE1D1EF81400038700EE44A0 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF71400038700EE44A0 /* Preferences.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		CE2320F219B27DCD0027AAC0 /* DDGProperties.c in Sources */ = {isa = PBXBuildFile; fileRef = CE2320F119B27DCD0027AAC0 /* DDGProperties.c */; };
+		CE39B5DE19B3B67E004DD2D5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE39B5DD19B3B67E004DD2D5 /* Images.xcassets */; };
 		CE3BC740163204A00064E081 /* CloudPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3BC73F163204A00064E081 /* CloudPreferences.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CE3BC744163204B10064E081 /* DDGCloudPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3BC743163204B10064E081 /* DDGCloudPreferences.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CEA28E1A13FFF526005EB7CD /* DDGPreferencesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1913FFF526005EB7CD /* DDGPreferencesAppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CEA28E1E13FFF538005EB7CD /* DDGPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CEA28E1F13FFF572005EB7CD /* Settings.bundle */; };
-		CEC241B9140404A700CED701 /* DDG Square 57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC241B8140404A700CED701 /* DDG Square 57x57.png */; };
-		CED4991C14030C0500466BE3 /* DDG Square.png in Resources */ = {isa = PBXBuildFile; fileRef = CED4991B14030C0500466BE3 /* DDG Square.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,14 +37,15 @@
 		CE01A79613FFF08D00880130 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE01A79C13FFF08D00880130 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		CE01A7A213FFF08D00880130 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DDGPreferencesViewController.xib; sourceTree = "<group>"; };
-		CE0BDE66163321C3002F6C00 /* NSData+DDGValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+DDGValue.h"; path = "Preferences/NSData+DDGValue.h"; sourceTree = "<group>"; };
-		CE0BDE67163321C3002F6C00 /* NSData+DDGValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+DDGValue.m"; path = "Preferences/NSData+DDGValue.m"; sourceTree = "<group>"; };
 		CE1D1EE613FFFD8D00EE44A0 /* DDGPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferences.h; sourceTree = "<group>"; };
 		CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferences.m; sourceTree = "<group>"; };
 		CE1D1EEB13FFFE9600EE44A0 /* DDGMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGMacros.h; sourceTree = "<group>"; };
 		CE1D1EEC13FFFE9600EE44A0 /* DDGMacros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGMacros.m; sourceTree = "<group>"; };
 		CE1D1EF61400038700EE44A0 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Preferences.h; path = Preferences/Preferences.h; sourceTree = "<group>"; };
 		CE1D1EF71400038700EE44A0 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Preferences.m; path = Preferences/Preferences.m; sourceTree = "<group>"; };
+		CE2320F119B27DCD0027AAC0 /* DDGProperties.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDGProperties.c; sourceTree = "<group>"; };
+		CE2320F319B27DF50027AAC0 /* DDGProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDGProperties.h; sourceTree = "<group>"; };
+		CE39B5DD19B3B67E004DD2D5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE3BC73E163204A00064E081 /* CloudPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CloudPreferences.h; path = Preferences/CloudPreferences.h; sourceTree = "<group>"; };
 		CE3BC73F163204A00064E081 /* CloudPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CloudPreferences.m; path = Preferences/CloudPreferences.m; sourceTree = "<group>"; };
 		CE3BC742163204B10064E081 /* DDGCloudPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGCloudPreferences.h; sourceTree = "<group>"; };
@@ -56,8 +56,6 @@
 		CEA28E1C13FFF538005EB7CD /* DDGPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGPreferencesViewController.h; sourceTree = "<group>"; };
 		CEA28E1D13FFF538005EB7CD /* DDGPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGPreferencesViewController.m; sourceTree = "<group>"; };
 		CEA28E1F13FFF572005EB7CD /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		CEC241B8140404A700CED701 /* DDG Square 57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square 57x57.png"; sourceTree = "<group>"; };
-		CED4991B14030C0500466BE3 /* DDG Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DDG Square.png"; sourceTree = "<group>"; };
 		CED95443144103BA00B95B2E /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -111,6 +109,7 @@
 				CE1D1EE513FFFD8D00EE44A0 /* DDGPreferences */,
 				CEA28E1B13FFF538005EB7CD /* DDGPreferencesView */,
 				CEA28E1713FFF526005EB7CD /* DDGPreferencesAppDelegate */,
+				CE39B5DD19B3B67E004DD2D5 /* Images.xcassets */,
 				CE01A79013FFF08D00880130 /* Supporting Files */,
 			);
 			path = DDGPreferences;
@@ -120,8 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				CE3BC7451632061E0064E081 /* DDGPreferences.entitlements */,
-				CEC241B8140404A700CED701 /* DDG Square 57x57.png */,
-				CED4991B14030C0500466BE3 /* DDG Square.png */,
 				CE01A79113FFF08D00880130 /* DDGPreferences-Info.plist */,
 				CE01A79213FFF08D00880130 /* InfoPlist.strings */,
 				CE01A79513FFF08D00880130 /* DDGPreferences-Prefix.pch */,
@@ -138,6 +135,8 @@
 				CE3BC743163204B10064E081 /* DDGCloudPreferences.m */,
 				CE1D1EE613FFFD8D00EE44A0 /* DDGPreferences.h */,
 				CE1D1EE713FFFD8D00EE44A0 /* DDGPreferences.m */,
+				CE2320F319B27DF50027AAC0 /* DDGProperties.h */,
+				CE2320F119B27DCD0027AAC0 /* DDGProperties.c */,
 			);
 			name = DDGPreferences;
 			path = ../../DDGPreferences;
@@ -160,8 +159,6 @@
 				CE1D1EF71400038700EE44A0 /* Preferences.m */,
 				CE3BC73E163204A00064E081 /* CloudPreferences.h */,
 				CE3BC73F163204A00064E081 /* CloudPreferences.m */,
-				CE0BDE66163321C3002F6C00 /* NSData+DDGValue.h */,
-				CE0BDE67163321C3002F6C00 /* NSData+DDGValue.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -212,7 +209,7 @@
 		CE01A77C13FFF08D00880130 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Donoho Design Group, L.L.C.";
 			};
 			buildConfigurationList = CE01A77F13FFF08D00880130 /* Build configuration list for PBXProject "DDGPreferences" */;
@@ -238,11 +235,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE01A79413FFF08D00880130 /* InfoPlist.strings in Resources */,
+				CE39B5DE19B3B67E004DD2D5 /* Images.xcassets in Resources */,
 				CE01A79D13FFF08D00880130 /* MainWindow.xib in Resources */,
 				CE01A7A313FFF08D00880130 /* DDGPreferencesViewController.xib in Resources */,
 				CEA28E2013FFF572005EB7CD /* Settings.bundle in Resources */,
-				CED4991C14030C0500466BE3 /* DDG Square.png in Resources */,
-				CEC241B9140404A700CED701 /* DDG Square 57x57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +257,7 @@
 				CE1D1EF81400038700EE44A0 /* Preferences.m in Sources */,
 				CE3BC740163204A00064E081 /* CloudPreferences.m in Sources */,
 				CE3BC744163204B10064E081 /* DDGCloudPreferences.m in Sources */,
-				CE0BDE68163321C3002F6C00 /* NSData+DDGValue.m in Sources */,
+				CE2320F219B27DCD0027AAC0 /* DDGProperties.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +296,7 @@
 		CE01A7A413FFF08D00880130 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -310,6 +306,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -317,7 +314,7 @@
 		CE01A7A513FFF08D00880130 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = "";
@@ -333,6 +330,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = DDGPreferences/DDGPreferences.entitlements;
 				COPY_PHASE_STRIP = NO;
@@ -343,9 +342,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DDGPreferences/DDGPreferences-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -354,6 +354,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = DDGPreferences/DDGPreferences.entitlements;
 				COPY_PHASE_STRIP = YES;
@@ -362,9 +364,10 @@
 				GCC_PREFIX_HEADER = "DDGPreferences/DDGPreferences-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DDGPreferences/DDGPreferences-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

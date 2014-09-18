@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //  Created by Andrew Donoho on 2009/05/23.
-//  Copyright 2009-2012 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2009-2014 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -12,7 +12,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2009-2012 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2009-2014 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -43,8 +43,6 @@
  
  */
 
-#import <Foundation/Foundation.h>
-
 #import "DDGMacros.h"
 
 #ifdef TESTFLIGHT
@@ -67,6 +65,30 @@ NSString *const kTrue         = @"true";
 NSString *const kFalse        = @"false";
 const NSTimeInterval kDefaultDuration = 0.25;
 
+@implementation DDGMacros
+
+#define kLog  (@selector(log:))
++ (void) log: (NSNotification *) notification {
+
+    NSLog(@"Notification Name: %@;\n\tObject: %@;\n\tUserInfo: %@.",
+          notification.name, notification.object, notification.userInfo);
+
+} // +log:
+
+
++ (void) logAllNotifications {
+
+    NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+
+    [nc removeObserver: self];
+
+    [nc addObserver: self selector: kLog name: nil object: nil];
+
+} // +logAllNotifications
+
+@end
+
+
 void _DDGTrace(const char *name, int line) {
 	
 	NSLog(@"%s (%d)", name, line);
@@ -80,10 +102,7 @@ void _DDGDesc(const char *name, int line, id object) {
 		
         NSLog(@"%s (%d)\nDescription: %@", name, line, object);
 	} 
-	else {
-		
-		NSLog(@"%s (%d)", name, line);
-	}
+	else { NSLog(@"%s (%d)", name, line); }
 	
 } // _DDGDesc()
 
@@ -117,68 +136,6 @@ void _DDGLog(const char *name, int line, NSString *format, ...) {
 } // _DDGLog()
 
 
-void _logViews(UIView *parent);
-void _logViews(UIView *parent) {
-	
-	NSLog(@"\n\tParent Class: %@; Subviews: %d\n---------", 
-          NSStringFromClass(parent.class), parent.subviews.count);
-	
-	for (UIView *v in parent.subviews) {
-		
-        NSLog(@"\n\tClass:  %@\n\tFrame:  %@\n\tBounds: %@", 
-              NSStringFromClass( v.class), 
-              NSStringFromCGRect(v.frame), 
-              NSStringFromCGRect(v.bounds));
-		
-		_logViews(v); // Print the subviews.
-	}
-	
-} // _logViews()
-
-
-void _logSubviews(const char *name, int line, UIView *parent) {
-	
-	NSLog(@"%s (%d)\n", name, line);
-	if (parent) {
-		
-		_logViews(parent);
-	}
-	
-} // _logSubviews()
-
-
-NSUInteger _countViews(UIView *parent);
-NSUInteger _countViews(UIView *parent) {
-	
-	if (parent.subviews.count) {
-		
-		NSUInteger count = 0;
-
-		for (UIView *v in parent.subviews) {
-			
-			count += _countViews(v);
-		}
-		return count;
-	}
-	else {
-		
-		return 1;
-	}
-	
-} // countViews_()
-
-
-NSUInteger _countSubviews(const char *name, int line, UIView *parent) {
-	
-	if (parent) {
-		
-		return _countViews(parent);
-	}
-	return 0;
-	
-} // _countSubviews()
-
-
 void _DDGDebugger(const char *name, int line) {
 	
 	NSLog(@"%s (%d)", name, line);
@@ -190,28 +147,28 @@ uint8_t htoc(char h) {
 	
 	switch (h) {
 			
-		case '0': return 0x0; break;
-		case '1': return 0x1; break;
-		case '2': return 0x2; break;
-		case '3': return 0x3; break;
-		case '4': return 0x4; break;
-		case '5': return 0x5; break;
-		case '6': return 0x6; break;
-		case '7': return 0x7; break;
-		case '8': return 0x8; break;
-		case '9': return 0x9; break;
-		case 'a': return 0xa; break;
-		case 'b': return 0xb; break;
-		case 'c': return 0xc; break;
-		case 'd': return 0xd; break;
-		case 'e': return 0xe; break;
-		case 'f': return 0xf; break;
-		case 'A': return 0xa; break;
-		case 'B': return 0xb; break;
-		case 'C': return 0xc; break;
-		case 'D': return 0xd; break;
-		case 'E': return 0xe; break;
-		case 'F': return 0xf; break;
+		case '0': return 0x0;
+		case '1': return 0x1;
+		case '2': return 0x2;
+		case '3': return 0x3;
+		case '4': return 0x4;
+		case '5': return 0x5;
+		case '6': return 0x6;
+		case '7': return 0x7;
+		case '8': return 0x8;
+		case '9': return 0x9;
+		case 'a': return 0xa;
+		case 'b': return 0xb;
+		case 'c': return 0xc;
+		case 'd': return 0xd;
+		case 'e': return 0xe;
+		case 'f': return 0xf;
+		case 'A': return 0xa;
+		case 'B': return 0xb;
+		case 'C': return 0xc;
+		case 'D': return 0xd;
+		case 'E': return 0xe;
+		case 'F': return 0xf;
 		default:  return 0xff;
 	}
 	
@@ -222,22 +179,22 @@ char ctoh(uint8_t c) {
 	
 	switch (c) {
 			
-		case 0x0: return '0'; break;
-		case 0x1: return '1'; break;
-		case 0x2: return '2'; break;
-		case 0x3: return '3'; break;
-		case 0x4: return '4'; break;
-		case 0x5: return '5'; break;
-		case 0x6: return '6'; break;
-		case 0x7: return '7'; break;
-		case 0x8: return '8'; break;
-		case 0x9: return '9'; break;
-		case 0xa: return 'a'; break;
-		case 0xb: return 'b'; break;
-		case 0xc: return 'c'; break;
-		case 0xd: return 'd'; break;
-		case 0xe: return 'e'; break;
-		case 0xf: return 'f'; break;
+		case 0x0: return '0';
+		case 0x1: return '1';
+		case 0x2: return '2';
+		case 0x3: return '3';
+		case 0x4: return '4';
+		case 0x5: return '5';
+		case 0x6: return '6';
+		case 0x7: return '7';
+		case 0x8: return '8';
+		case 0x9: return '9';
+		case 0xa: return 'a';
+		case 0xb: return 'b';
+		case 0xc: return 'c';
+		case 0xd: return 'd';
+		case 0xe: return 'e';
+		case 0xf: return 'f';
 		default:  return 0xff;
 	}
 	

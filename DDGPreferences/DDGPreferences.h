@@ -23,7 +23,7 @@
  personalizations.
  <http://www.opensource.org/licenses/bsd-license.php>
  
- Copyright (C) 2010-2012 Donoho Design Group, LLC. All Rights Reserved.
+ Copyright (C) 2010-2014 Donoho Design Group, LLC. All Rights Reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are
@@ -54,7 +54,19 @@
  
  */
 
-#import <Foundation/Foundation.h>
+/*
+ iOSv8 introduced @property declarations on the <NSObject> protocol. This has
+ caused the addition of property name checks. The following property names will
+ not be persisted in your classes:
+
+    "hash", "dirty", "superclass", "settingsKeys",
+    "description", "debugDescription"
+
+ As four of those names were key methods on the <NSObject> protocol, this
+ restriction does not, in practice, affect most folks.
+ */
+
+@import Foundation;
 
 extern NSString *const kDirtyKey;
 

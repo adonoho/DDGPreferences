@@ -3,7 +3,7 @@
 //  DDG Library
 //
 //  Created by Andrew Donoho on 2010/02/09.
-//  Copyright 2010-2012 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright 2010-2014 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -44,10 +44,11 @@
  */
 
 #if !__has_feature(objc_arc)
-#  error Please compile this class with ARC (-fobjc-arc).
+#  warning Please compile this class with ARC (-fobjc-arc).
 #endif
 
 #import "DDGPreferences.h"
+#import "DDGProperties.h"
 
 #import <objc/runtime.h>
 
@@ -59,7 +60,7 @@ NSString *const kDirtyKey = @"dirty";
 @interface DDGPreferences ()
 
 @property (getter = isDirty, readwrite, nonatomic) BOOL dirty;
-@property (strong, readonly, nonatomic) NSArray *settingsKeys;
+@property (readonly, nonatomic) NSArray *settingsKeys;
 
 - (void) observeProperties;
 - (void) removeSelfObserver;
@@ -86,7 +87,7 @@ NSString *const kDirtyKey = @"dirty";
 } // -dealloc
 
 
-- (id) init {
+- (instancetype) init {
 	
 	DDGTrace();
 	
@@ -135,7 +136,7 @@ static NSString *const  kFile		   = @"File";
 	
 	if (settingsDict) {
 		
-		NSArray  *prefSpecifierArray = [settingsDict objectForKey: kPrefSpecifier];
+		NSArray  *prefSpecifierArray = settingsDict[kPrefSpecifier];
 		
 		NSMutableDictionary  *items = [NSMutableDictionary dictionaryWithCapacity: [prefSpecifierArray count]];
 		
@@ -190,7 +191,7 @@ static NSString *const  kFile		   = @"File";
         
         [defaults registerDefaults: items];
         
-        for (NSString *key in items.allKeys) {
+        for (NSString *key in items.keyEnumerator) {
             
             NSString *prefKey = [NSString.alloc initWithFormat: @"%s_%@", className, key];
             
@@ -225,13 +226,8 @@ static NSString *const  kFile		   = @"File";
             id value = [defaults objectForKey: key];
             id pref  = [defaults objectForKey: prefKey];
             
-            if (pref && ![value isEqual: pref]) {
+            if (![value isEqual: pref]) {
                 
-                DDGDesc(key);
-                DDGDesc(value);
-                DDGDesc(pref);
-                DDGDesc(self);
-
                 // Settings overwrite the preferences.
                 [self     setValue:  value forKey: key];
                 [defaults setObject: value forKey: prefKey];
@@ -251,20 +247,15 @@ static NSString *const  kFile		   = @"File";
 	if (keys.count) {
 		
 		NSUserDefaults *defaults  = [NSUserDefaults standardUserDefaults];
-        const char     *className = class_getName(self.class);
-        
-        DDGDesc(self);
 
         for (NSString *key in keys) {
             
-            NSString *prefKey = [NSString.alloc initWithFormat: @"%s_%@", className, key];
-
-            id value = [defaults objectForKey: key];
-            id pref  = [defaults objectForKey: prefKey];
+            id value = [self valueForKey: key];
+            id pref  = [defaults objectForKey: key];
             
             if (![value isEqual: pref]) {
             
-                [defaults setObject: pref forKey: key];
+                [defaults setObject: value forKey: key];
             }
         }
 	}
@@ -337,35 +328,40 @@ static NSString *const  kFile		   = @"File";
 
 
 - (void) readProperties {
-	
+
 	DDGTrace();
-	
+
 	unsigned int     propertyCount = 0;
 	objc_property_t *propertyList  = class_copyPropertyList(self.class, &propertyCount);
 	const char      *className     = class_getName(self.class);
 	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
-	
+
 	DDGDesc(defaults.dictionaryRepresentation);
-	
+
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
-		
+
         const char *propName = property_getName(propertyList[i]);
-		NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
-        NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
-                                                      length: strlen( propName)
-                                                    encoding: NSUTF8StringEncoding
-                                                freeWhenDone: NO];
-        id value = [self     valueForKey:  key];
-        id pref  = [defaults objectForKey: prefKey];
-        
-        if (pref && ![value isEqual: pref]) {
-            
-            [self setValue: pref forKey: key];
+
+        if (supportedPropName(propName)) {
+
+            NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
+            NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                           length: strlen( propName)
+                                                         encoding: NSUTF8StringEncoding
+                                                     freeWhenDone: NO];
+            id value = [self     valueForKey:  key];
+            id pref  = [defaults objectForKey: prefKey];
+
+            if (pref && ![value isEqual: pref]) {
+                // Don't overwrite if the value doesn't exist.
+
+                [self setValue: pref forKey: key];
+            }
         }
 	}
 	free(propertyList), propertyList = NULL;
-	
+
 } // -readProperties
 
 
@@ -384,35 +380,39 @@ static NSString *const  kFile		   = @"File";
 
 
 - (void) writeProperties {
-	
+
 	DDGTrace();
-	
+
 	unsigned int     propertyCount = 0;
 	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
 	const char      *className     = class_getName(self.class);
 	NSUserDefaults  *defaults      = [NSUserDefaults standardUserDefaults];
-	
+
 	DDGDesc(defaults.dictionaryRepresentation);
-	
+
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
-		
+
         const char *propName = property_getName(propertyList[i]);
-		NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
-        NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
-                                                       length: strlen( propName)
-                                                     encoding: NSUTF8StringEncoding
-                                                 freeWhenDone: NO];
-        id value = [self     valueForKey:  key];
-        id pref  = [defaults objectForKey: prefKey];
-        
-        if (![value isEqual: pref]) {
-            
-            [defaults setObject: value forKey: prefKey];
+
+        if (supportedPropName(propName)) {
+
+            NSString   *prefKey  = [NSString.alloc initWithFormat: @"%s_%s", className, propName];
+            NSString   *key = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                           length: strlen( propName)
+                                                         encoding: NSUTF8StringEncoding
+                                                     freeWhenDone: NO];
+            id value = [self     valueForKey:  key];
+            id pref  = [defaults objectForKey: prefKey];
+
+            if (![value isEqual: pref]) {
+
+                [defaults setObject: value forKey: prefKey];
+            }
         }
 	}
 	free(propertyList), propertyList = NULL;
-	
+
 } // -writeProperties
 
 
@@ -434,68 +434,81 @@ static NSString *const  kFile		   = @"File";
 #pragma mark - Self Observing KVO Methods
 
 
+static void *ddgPreferencesContext = &ddgPreferencesContext;
+
 - (void) observeValueForKeyPath: (NSString *) keyPath 
-					   ofObject: (id<NSObject>) object 
+					   ofObject: (id) object 
 						 change: (NSDictionary *) change 
 						context: (void *) context {
-    
-	DDGTrace();
-	
-    id<NSObject> newValue = [change valueForKey: NSKeyValueChangeNewKey];
-    id<NSObject> oldValue = [change valueForKey: NSKeyValueChangeOldKey];
 
-	if (newValue && ![newValue isEqual: oldValue]) {
-        
-		self.dirty = YES;
-	}
-	
+    DDGTrace();
+
+    if (context == ddgPreferencesContext) {
+
+        id<NSObject> newValue = [change valueForKey: NSKeyValueChangeNewKey];
+        id<NSObject> oldValue = [change valueForKey: NSKeyValueChangeOldKey];
+
+        if (newValue && ![newValue isEqual: oldValue]) {
+
+            self.dirty = YES;
+        }
+    }
+
 } // -observeValueForKeyPath:ofObject:change:context:
 
 
 - (void) observeProperties {
-	
+
 	DDGTrace();
-	
+
 	unsigned int     propertyCount = 0;
 	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
-	
+
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
-		
+
         const char *propName = property_getName(propertyList[i]);
-        NSString *name = [NSString.alloc initWithBytesNoCopy: (void *)propName
-                                                      length: strlen( propName)
-                                                    encoding: NSUTF8StringEncoding
-                                                freeWhenDone: NO];
-		[self addObserver: self
-               forKeyPath: name
-                  options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                  context: nil];
+
+        if (supportedPropName(propName)) {
+            
+            NSString *name = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                          length: strlen( propName)
+                                                        encoding: NSUTF8StringEncoding
+                                                    freeWhenDone: NO];
+            [self addObserver: self
+                   forKeyPath: name
+                      options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                      context: ddgPreferencesContext];
+        }
 	}
 	free(propertyList), propertyList = NULL;
-	
+
 } // -observeProperties
 
 
 - (void) removeSelfObserver {
-	
+
 	DDGTrace();
-	
+
 	unsigned int     propertyCount = 0;
 	objc_property_t *propertyList  = class_copyPropertyList([self class], &propertyCount);
-	
+
 	// Loop through properties.
 	for (unsigned int i = 0; i < propertyCount; i++) {
-		
+
         const char *propName = property_getName(propertyList[i]);
-        NSString *name = [NSString.alloc initWithBytesNoCopy: (void *)propName
-                                                      length: strlen( propName)
-                                                    encoding: NSUTF8StringEncoding
-                                                freeWhenDone: NO];
-		[self removeObserver: self forKeyPath: name];
+
+        if (supportedPropName(propName)) {
+
+            NSString *name = [NSString.alloc initWithBytesNoCopy: (void *)propName
+                                                          length: strlen( propName)
+                                                        encoding: NSUTF8StringEncoding
+                                                    freeWhenDone: NO];
+            [self removeObserver: self forKeyPath: name context: ddgPreferencesContext];
+        }
 	}
 	free(propertyList), propertyList = NULL;
-	
+
 } // -removeSelfObserver
 
 
@@ -504,14 +517,11 @@ static NSString *const  kFile		   = @"File";
 
 #define kApplicationWillTerminate  (@selector(applicationWillTerminate:))
 - (void) applicationWillTerminate: (NSNotification *) notification {
-	
+
 	DDGTrace();
-	
-	if (self.isDirty) {
-		
-		[self writePreferences];
-	}
-	
+
+    [self applicationDidEnterBackground: notification];
+
 } // -applicationWillTerminate:
 
 
@@ -527,41 +537,51 @@ static NSString *const  kFile		   = @"File";
 } // -applicationDidEnterBackground:
 
 
-#define kApplicationWillEnterForeground  (@selector(applicationWillEnterForeground:))
-- (void) applicationWillEnterForeground: (NSNotification *) notification {
-	
-	[[NSUserDefaults standardUserDefaults] synchronize];
+#define kUserDefaultsDidChange  (@selector(userDefaultsDidChange:))
+- (void) userDefaultsDidChange: (NSNotification *) notification {
 
-	DDGDesc(NSUserDefaults.standardUserDefaults.dictionaryRepresentation);
-    
-    [self readSettings];
-	
-} // -applicationWillEnterForeground:
+    if (!self.isDirty) {
+        // Only read the settings when the prefs are clean. I.e. this notification
+        // is fired on every setValue on the -standardUserDefaults. Hence, let
+        // the update finish before synchronizing the data. When the prefs are
+        // clean, as they always are after exiting the app, then it is safe to
+        // read the -standardUserDefaults upon reactivation.
+
+        [NSUserDefaults.standardUserDefaults synchronize];
+
+        DDGDesc(NSUserDefaults.standardUserDefaults.dictionaryRepresentation);
+
+        [self readSettings];
+
+        [NSUserDefaults.standardUserDefaults synchronize];
+    }
+
+} // -userDefaultsDidChange:
 
 
 - (void) observeNotifications {
-    
+
     DDGTrace();
-    
+
     NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
-    
+
     [nc removeObserver: self];
-    
-    [nc addObserver: self 
-           selector:  kApplicationWillTerminate 
-               name: UIApplicationWillTerminateNotification 
+
+    [nc addObserver: self
+           selector:  kApplicationWillTerminate
+               name: UIApplicationWillTerminateNotification
              object: nil];
-    
-    [nc addObserver: self 
-           selector:  kApplicationDidEnterBackground 
-               name: UIApplicationDidEnterBackgroundNotification 
+
+    [nc addObserver: self
+           selector:  kApplicationDidEnterBackground
+               name: UIApplicationDidEnterBackgroundNotification
              object: nil];
-    
-    [nc addObserver: self 
-           selector:  kApplicationWillEnterForeground
-               name: UIApplicationWillEnterForegroundNotification 
-             object: nil];
-    
+
+    [nc addObserver: self
+           selector:  kUserDefaultsDidChange
+               name: NSUserDefaultsDidChangeNotification
+             object: NSUserDefaults.standardUserDefaults];
+
 } // -observeNotifications;
 
 @end

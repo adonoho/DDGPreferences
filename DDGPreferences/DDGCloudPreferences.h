@@ -3,7 +3,7 @@
 //  DDGPreferences
 //
 //  Created by Andrew Donoho on 2012/10/19.
-//  Copyright (c) 2012 Donoho Design Group, L.L.C. All rights reserved.
+//  Copyright (c) 2012-2014 Donoho Design Group, L.L.C. All rights reserved.
 //
 
 /*
@@ -43,13 +43,13 @@
  
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @class DDGPreferences;
 
 @interface DDGCloudPreferences : NSObject
 
-- (DDGCloudPreferences *) initWithPreferences: (DDGPreferences *) preferences;
+- (instancetype) initWithPreferences: (DDGPreferences *) preferences;
 
 - (void)  readCloud;
 - (void) writeCloud;
